@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import MyWork from '../assets/MyWork';
-import { IoIosArrowRoundForward } from 'react-icons/io';
+import { IoIosArrowRoundForward, IoIosArrowRoundBack } from 'react-icons/io';
 import bgimage from '../assets/bg1.avif';
 
 const MyWorks = () => {
   const [showAll, setShowAll] = useState(false);
-  const worksToShow = showAll ? MyWork : MyWork.slice(0, 2);
+  const worksToShow = showAll ? MyWork : MyWork.slice(0, 4);
 
   return (
     <div
@@ -75,29 +75,52 @@ const MyWorks = () => {
         ))}
       </div>
 
-      {/* Show More Button */}
-      {!showAll && MyWork.length > 4 && (
+      {/* Show More / Less Buttons */}
+      {MyWork.length > 4 && (
         <div className='mt-8'>
-          <button
-            onClick={() => setShowAll(true)}
-            className='
-              group flex items-center gap-2 
-              px-6 py-3 rounded-full text-white text-xl font-semibold
-              border-1
-              hover:shadow-ms hover:border-white
-              transition-all duration-300
-              select-none
-              focus:outline-none focus:ring-1
-            '
-          >
-            Show More
-            <IoIosArrowRoundForward
+          {showAll ? (
+            <button
+              onClick={() => setShowAll(false)}
               className='
-                ml-1 text-2xl transition-transform duration-500
-                group-hover:translate-x-3
+                group flex items-center gap-2 
+                px-6 py-3 rounded-full text-white text-xl font-semibold
+                border-1
+                hover:shadow-ms hover:border-white
+                transition-all duration-300
+                select-none
+                focus:outline-none focus:ring-1
               '
-            />
-          </button>
+            >
+              <IoIosArrowRoundBack
+                className='
+                  mr-1 text-2xl transition-transform duration-500
+                  group-hover:-translate-x-3
+                '
+              />
+              Show Less
+            </button>
+          ) : (
+            <button
+              onClick={() => setShowAll(true)}
+              className='
+                group flex items-center gap-2 
+                px-6 py-3 rounded-full text-white text-xl font-semibold
+                border-1
+                hover:shadow-ms hover:border-white
+                transition-all duration-300
+                select-none
+                focus:outline-none focus:ring-1
+              '
+            >
+              Show More
+              <IoIosArrowRoundForward
+                className='
+                  ml-1 text-2xl transition-transform duration-500
+                  group-hover:translate-x-3
+                '
+              />
+            </button>
+          )}
         </div>
       )}
     </div>

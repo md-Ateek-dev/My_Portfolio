@@ -50,15 +50,15 @@ const Contact = () => {
           </p>
           <div className='flex flex-col gap-5'>
             <div className='flex items-center gap-3'>
-              <MdEmail className='text-black text-xl' />
+              <MdEmail className='text-white text-xl' />
               <p>mohdateek@gmail.com</p>
             </div>
             <div className='flex items-center gap-3'>
-              <FaPhoneAlt className='text-black text-sm' />
+              <FaPhoneAlt className='text-white text-sm' />
               <p>+91 7054375826</p>
             </div>
             <div className='flex items-center gap-3'>
-              <IoLocationSharp className='text-black text-xl' />
+              <IoLocationSharp className='text-white text-xl' />
               <p>Lucknow, India</p>
             </div>
             <div className='flex gap-6 flex-wrap'>

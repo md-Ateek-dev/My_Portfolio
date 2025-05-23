@@ -1,7 +1,7 @@
 const Services_Data =[
     {
         s_no:"1",
-        s_name:"I am a Full Stack Developer",
+        s_name:"Full Stack Developer",
         s_desc:" I am a web developer i am itern at digicoders technologise.."
     },
     {
