@@ -1,64 +1,94 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { MdOutlineClose } from "react-icons/md";
+import { FaUser, FaEnvelope } from "react-icons/fa";
 
 const ContactUs = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    
-    const handleSubmit =(e) =>{
-      e.preventDefault();
-    };
-    
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsModalOpen(false);
+  };
+
   return (
-   
-    <div className="flex items-center justify-center relative">
-    <button
-      onClick={() => setIsModalOpen( true)}
-      className="bg-green-600 text-white px-5 py-5 rounded-xl shadow-md hover:bg-green-700 transition fixed top-1/2 right-6 -translate-y-1/2 rotate-[-90deg] origin-right"
-    >
-      Contact Us
-    </button>
+    <div className="relative z-50">
+      {/* Floating Side Button */}
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="bg-blue-600 text-white px-4 py-4 sm:px-5 sm:py-5 rounded-xl shadow-md hover:bg-blue-700 transition fixed top-1/2 right-2 sm:right-6 -translate-y-1/2 me-3 mt-5 rotate-[-90deg] origin-right z-1"
+      >
+        Contact Us
+      </button>
 
-    {isModalOpen && (
-      <div className="fixed inset-0 bg-black/10 flex items-center justify-center z-30">
-        <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md relative animate-fade-in-up">
-          <h2 className="text-2xl font-semibold mb-4 text-center">Contact Us</h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">Name</label>
-              <input
-                type="text"
-                className="w-full border border-gray-300 rounded-xl p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Email</label>
-              <input
-                type="email"
-                className="w-full border border-gray-300 rounded-xl p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div className="flex justify-end gap-2">
-              <button
-                type="button"
-                onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 bg-gray-300 rounded-xl hover:bg-gray-400 transition"
-              >
-                Cancel
-              </button>
-              <button onClick={ () =>setIsModalOpen(false)}
-                type="submit"
-                className="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 w-full max-w-sm sm:max-w-md relative animate-fade-in-up">
+            
+            {/* Close Button */}
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-2xl"
+            >
+              <MdOutlineClose />
+            </button>
+
+            <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">Get in Touch</h2>
+
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Name Input */}
+              <div className="relative">
+                <FaUser className="absolute top-3 left-3 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  required
+                  className="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-400 outline-none"
+                />
+              </div>
+
+              {/* Email Input */}
+              <div className="relative">
+                <FaEnvelope className="absolute top-3 left-3 text-gray-400" />
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  required
+                  className="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-400 outline-none"
+                />
+              </div>
+
+              {/* Message Textarea */}
+              <div>
+                <textarea
+                  placeholder="Your Message"
+                  rows="3"
+                  className="w-full px-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-400 outline-none resize-none"
+                ></textarea>
+              </div>
+
+              {/* Buttons */}
+              <div className="flex justify-between mt-4">
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  className="w-[48%] py-2 text-gray-600 border border-gray-300 rounded-xl hover:bg-gray-100 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="w-[48%] py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+                >
+                  Send
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    )}
-  </div>
-);
-}
+      )}
+    </div>
+  );
+};
 
-export default ContactUs
+export default ContactUs;

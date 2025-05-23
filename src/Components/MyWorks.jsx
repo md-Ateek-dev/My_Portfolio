@@ -1,29 +1,107 @@
-import React from 'react'
-import MyWork from '../assets/MyWork'
-import { IoIosArrowRoundForward } from "react-icons/io";
+import React, { useState } from 'react';
+import MyWork from '../assets/MyWork';
+import { IoIosArrowRoundForward } from 'react-icons/io';
+import bgimage from '../assets/bg1.avif';
 
 const MyWorks = () => {
-  return (
-    <div id='work' className='bg-gradient-to-r from-purple-500 to-blue-500 flex flex-col items-center justify-center gap-30'>
-      <div className=''>
-        <h1 className='p-4 mt-10 text-4xl font-bold bg-gradient-to-r from-orange-600/100 to-green-500/60 bg-yellow-400/100 bg-clip-text text-transparent transition-all transform-gpu hover:scale-105'>My Letest Work</h1>
-      </div>
-      <div className='grid grid-cols-[1fr_1fr_1fr_1fr] gap-15 items-center justify-center'>
-        {MyWork.map((Work,index)=>{
-          return <img className='h-55 w-80 rounded-xl shadow-2xl shadow-blue-200 border-2 border-violet-600 transition-all transform-gpu hover:scale-105 hover:opacity-60 hover:border-amber-500' key={index} src={Work.w_imag} alt="" />
-        })}
-      </div>
-      <div className='text-white flex'>
-      <p className="flex items-center text-3xl text-white bg-gradient-to-r from-orange-600 to-green-500 
-      border-2 border-amber-600 rounded-full cursor-pointer p-2 
-      transition-all duration-500 ease-in-in hover:bg-orange-700 hover:shadow-lg hover:gap-4 hover:border-green-700">
-      Show More 
-      <IoIosArrowRoundForward className="ml-1 transition-transform duration-500 ease-in-out group-hover:translate-x-2" />
-    </p>         
-         
-        </div>
-    </div>
-  )
-}
+  const [showAll, setShowAll] = useState(false);
+  const worksToShow = showAll ? MyWork : MyWork.slice(0, 2);
 
-export default MyWorks
+  return (
+    <div
+      style={{ backgroundImage: `url(${bgimage})` }}
+      id='work'
+      className='
+        bg-cover bg-center bg-no-repeat
+        bg-gradient-to-r from-purple-500 to-blue-500 
+        flex flex-col items-center justify-center 
+        px-4 py-12 gap-12 w-full min-h-screen
+      '
+    >
+      {/* Heading */}
+      <h1
+        className='
+          text-4xl sm:text-5xl font-extrabold mt-6 
+          text-white text-center
+          transition-transform duration-300 hover:scale-90 select-none
+          drop-shadow-lg
+        '
+      >
+        My Latest Work
+      </h1>
+
+      {/* Work Grid */}
+      <div
+        className='
+          grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8
+          max-w-7xl w-full px-4
+        '
+      >
+        {worksToShow.map((work, index) => (
+          <div
+            key={index}
+            className='
+              relative rounded-xl overflow-hidden shadow-lg
+              cursor-pointer group
+              animate-fade-in-up
+              transition-all duration-500
+              hover:shadow-2xl
+            '
+            style={{ animationDelay: `${index * 100}ms` }}
+          >
+            <img
+              src={work.w_imag}
+              alt={`Work ${index + 1}`}
+              className='
+                w-full h-52 sm:h-56 md:h-60 object-cover
+                rounded-xl
+                transition-transform duration-500 group-hover:scale-105
+              '
+            />
+            {/* Blurred overlay on hover */}
+            <div
+              className='
+                absolute inset-0 bg-black bg-opacity-40 opacity-0
+                group-hover:opacity-70 transition-opacity duration-500
+                rounded-xl
+                flex items-center justify-center
+                text-white text-lg font-semibold
+                pointer-events-none
+              '
+            >
+              View Project
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Show More Button */}
+      {!showAll && MyWork.length > 4 && (
+        <div className='mt-8'>
+          <button
+            onClick={() => setShowAll(true)}
+            className='
+              group flex items-center gap-2 
+              px-6 py-3 rounded-full text-white text-xl font-semibold
+              border-1
+              hover:shadow-ms hover:border-white
+              transition-all duration-300
+              select-none
+              focus:outline-none focus:ring-1
+            '
+          >
+            Show More
+            <IoIosArrowRoundForward
+              className='
+                ml-1 text-2xl transition-transform duration-500
+                group-hover:translate-x-3
+              '
+            />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default MyWorks;

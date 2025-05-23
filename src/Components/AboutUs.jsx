@@ -1,57 +1,97 @@
-import React from 'react'
-import ProfileImage from '../assets/ProfileImage.png'
+import React from 'react';
+import ProfileImage from '../assets/ProfileImage.png';
+import bgimage from '../assets/bg1.avif';
+
 const AboutUs = () => {
   return (
-    <div id='about' className='flex flex-col items-center justify-center gap-20 bg-gradient-to-r from-purple-500 to-blue-500 text-gray-900'>
-        <div className=''>
-            <h1 className='text-3xl p-2 font-bold bg-gradient-to-r from-orange-600/100 to-green-500/60 bg-yellow-400/100 bg-clip-text text-transparent transition-all transform-gpu hover:scale-105'>About Me</h1>
-        </div>
-        <div className='flex gap-20'>
-            <div className='flex flex-col '>
-            <img src={ProfileImage} alt="ProfileImage" className='rounded-xl backdrop-blur-md ' />
-           
-            </div>
-            <div className='flex flex-col gap-20'>
-                <div className='flex flex-col text-2xl font-extralight'>
-                    <p className='text-white'><span className='font-normal bg-gradient-to-r from-orange-600/100 to-green-500/60 bg-yellow-400/100 bg-clip-text text-transparent'>"I' am Mohd Ateek </span>I'm a Full Stack Developer"
+    <div
+        style={{ backgroundImage: `url(${bgimage})` }}
+    
+      id='about'
+      className='bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center gap-12 px-4 py-8 bg-gradient-to-r from-purple-500 to-blue-500 text-white w-full'
+    >
+      {/* Heading */}
+      <h1 className='text-3xl sm:text-4xl font-bold  text-center hover:scale-105 transition-transform'>
+        About Me
+      </h1>
 
-</p>
-                         <p className='text-white'> who loves building clean, responsive websites and solving real-world <br /> problems with impactful code. Clean Code, Real Impact."
-                             </p>
-                </div>
-                <div className='flex flex-col gap-10'>
-                <div className='flex gap-5 items-center font-medium transform-content transition-all hover:scale-105 duration-150'>
-  <p >HTML&CSS100%</p>
-  <hr className='w-full outline-0 border-0 h-2 rounded-full bg-gradient-to-r from-orange-600 via-yellow-400 to-green-500'/>
-</div>
-                    <div className='flex gap-20 items-center font-medium transform-content transition-all hover:scale-105 duration-150'><p >Javascript 80%</p> <hr className='w-full outline-0 border-0 h-2 rounded-full bg-gradient-to-r from-orange-600/100 to-green-500/60 bg-yellow-400/100'/></div>
-                    <div className='flex gap-20 items-center font-medium transform-content transition-all hover:scale-105 duration-150'><p >Bootstrap 100%</p> <hr className='w-100 outline-0 border-0 h-2 rounded-full bg-gradient-to-r from-orange-600/100 to-green-500/60 bg-yellow-400/100'/></div>
-                    <div className='flex gap-20 items-center font-medium transform-content transition-all hover:scale-105 duration-150'><p>React.js 70%</p> <hr className='w-70 outline-0 border-0 h-2 rounded-full bg-gradient-to-r from-orange-600/100 to-green-500/60 bg-yellow-400/100'/></div>
-                    <div className='flex gap-20 items-center font-medium transform-content transition-all hover:scale-105 duration-150'><p>Node.js 80%</p> <hr className='w-80 outline-0 border-0 h-2 rounded-full bg-gradient-to-r from-orange-600/100 to-green-500/60 bg-yellow-400/100'/></div>
-                    <div className='flex gap-20 items-center font-medium transform-content transition-all hover:scale-105 duration-150'><p>Express.js 80%</p> <hr className='w-80 outline-0 border-0 h-2 rounded-full bg-gradient-to-r from-orange-600/100 to-green-500/60 bg-yellow-400/100'/></div>
-                    <div className='flex gap-20 items-center font-medium transform-content transition-all hover:scale-105 duration-150'><p>MongoDB 90%</p> <hr className='w-90 outline-0 border-0 h-2 rounded-full bg-gradient-to-r from-orange-600/100 to-green-500/60 bg-yellow-400/100'/></div>
-                </div>
-            </div>
+      {/* Image & Text Section */}
+      <div className='flex flex-col md:flex-row items-center justify-center gap-10 w-full max-w-6xl'>
+        {/* Profile Image */}
+        <div className='w-full md:w-1/3 flex justify-center'>
+          <img
+            src={ProfileImage}
+            alt='ProfileImage'
+            className='rounded-xl w-48 sm:w-56 md:w-64 lg:w-72 object-cover shadow-lg hover:scale-105 transition-transform'
+          />
         </div>
-        <div className='flex w-full justify-around mb-5'>
-            <div className='transform-gpu transition-normal hover:scale-105 duration-150' >
-                <h1 className='text-3xl font-bold bg-gradient-to-r from-orange-600/100 to-green-500/60 bg-yellow-400/100 bg-clip-text text-transparent'>1+</h1>
-                <p className='text-xl'>YEAR OF EXPERIENCE</p>   
-            </div>
-            <hr />
-            <div className='transform-gpu transition-normal hover:scale-105 duration-150'>
-                
-                <h1 className='text-3xl font-bold bg-gradient-to-r from-orange-600/100 to-green-500/60 bg-yellow-400/100 bg-clip-text text-transparent'>5+</h1>
-                <p className='text-xl'>PROJECT COMPLETED</p>
-            </div>
-            <hr/>
-            <div className='transform-gpu transition-normal hover:scale-105 duration-150 mb-5'>
-                <h1 className='text-3xl font-bold bg-gradient-to-r from-orange-600/100 to-green-500/60 bg-yellow-400/100 bg-clip-text text-transparent'>Pending..</h1>
-                <p className='text-xl'>HAPPY CLIENTS</p>
-            </div>
+
+        {/* Text & Skills */}
+        <div className='flex flex-col gap-6 w-full md:w-2/3'>
+          <div className='text-lg sm:text-xl font-light text-center md:text-left'>
+            <p>
+              <span className='font-semibold bg-gradient-to-r from-orange-600 to-green-500 bg-clip-text text-transparent'>
+                "I'm Mohd Ateek
+              </span>{' '}
+              I'm a Full Stack Developer"
+            </p>
+            <p>
+              who loves building clean, responsive websites and solving real-world problems
+              with impactful code. "Clean Code, Real Impact."
+            </p>
+          </div>
+
+          {/* Skills Progress */}
+          <div className='flex flex-col gap-4'>
+            {[
+              ['HTML & CSS', 100],
+              ['JavaScript', 80],
+              ['Bootstrap', 100],
+              ['React.js', 70],
+              ['Node.js', 80],
+              ['Express.js', 80],
+              ['MongoDB', 90],
+            ].map(([skill, percent], index) => (
+              <div
+                key={index}
+                className='flex flex-col sm:flex-row sm:items-center gap-2 font-medium hover:scale-[1.02] transition-transform'
+              >
+                <p className='w-full sm:w-40'>{skill} {percent}%</p>
+                <hr
+                  className='w-full h-2 rounded-full border-0 outline-none bg-white'
+                  style={{ width: `${percent}%` }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
+      </div>
+
+      {/* Experience / Projects / Clients */}
+      <div className='flex flex-col sm:flex-row items-center justify-around w-full max-w-5xl gap-6 mt-10 text-center'>
+        <div className='hover:scale-105 transition-transform'>
+          <h1 className='text-3xl font-bold bg-gradient-to-r from-orange-600 to-green-500 bg-clip-text text-transparent'>
+            1+
+          </h1>
+          <p className='text-xl'>YEAR OF EXPERIENCE</p>
+        </div>
+
+        <div className='hover:scale-105 transition-transform'>
+          <h1 className='text-3xl font-bold bg-gradient-to-r from-orange-600 to-green-500 bg-clip-text text-transparent'>
+            5+
+          </h1>
+          <p className='text-xl'>PROJECTS COMPLETED</p>
+        </div>
+
+        <div className='hover:scale-105 transition-transform'>
+          <h1 className='text-3xl font-bold bg-gradient-to-r from-orange-600 to-green-500 bg-clip-text text-transparent'>
+            Pending..
+          </h1>
+          <p className='text-xl'>HAPPY CLIENTS</p>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default AboutUs
+export default AboutUs;

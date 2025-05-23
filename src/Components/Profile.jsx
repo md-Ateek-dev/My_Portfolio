@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import ProfileImage from '../assets/ProfileImage.png';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
-import ContactUs from './ContactUs';
-const Profile = () => {
-  const [contact, setContact] = useState(false);
+import bgimage from '../assets/bg1.avif'
 
-  // ✅ Function ko JSX ke return ke bahar rakho
+const Profile = () => {
   const downloadPDF = () => {
     const link = document.createElement('a');
     link.href = 'https://drive.google.com/uc?export=download&id=1mqorA5SnoM5r8-YNmbVB1p7Vba9k2Wpb';
@@ -17,37 +15,68 @@ const Profile = () => {
 
   return (
     <div
+    style={{ backgroundImage: `url(${bgimage})` }}
+
       id='profile'
-      className='flex items-center flex-col gap-5 bg-gradient-to-r from-purple-500 to-blue-500'
+      className=' bg-cover bg-center bg-no-repeat
+        flex flex-col items-center justify-center gap-6 
+        px-4 py-16 sm:py-20 md:py-24 
+        bg-gradient-to-r from-purple-500 to-blue-500 
+        text-white w-full scroll-mt-20
+      '
     >
+      {/* Profile Image */}
       <img
         src={ProfileImage}
-        alt='ProfileImage'
-        className='border-2 rounded-full h-50 w-50 mt-5 transition-all transform-stroke hover:scale-105'
+        alt='Profile'
+        className='
+          w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 
+          rounded-full object-cover border-4 border-white 
+          shadow-xl mt-8 hover:scale-105 transition-transform
+          z-10
+        '
       />
-      <h1 className='text-3xl font-bold text-center w-70 bg-gradient-to-r from-orange-600/100 to-green-500/60 bg-yellow-400/100 bg-clip-text text-transparent'>
+
+      {/* Heading */}
+      <h1 className='
+        text-3xl sm:text-4xl md:text-5xl font-extrabold text-center 
+        bg-gradient-to-r from-orange-600 to-green-500 
+        bg-clip-text text-transparent select-none
+      '>
         I'm Mohd Ateek
       </h1>
-      <p className='text-2xl font-semibold'>I am Full Stack Developer</p>
 
-      <div className='flex items-center gap-5 text-xl font-sans mb-5'>
+      {/* Subheading */}
+      <p className='
+        text-lg sm:text-xl md:text-2xl font-medium text-center text-white 
+        max-w-2xl px-4
+      '>
+        Full Stack Developer | MERN Stack Specialist
+      </p>
+
+      {/* Action Buttons */}
+      <div className='flex flex-col sm:flex-row items-center justify-center gap-4 mt-4'>
         {/* Connect Me Button */}
-        <div
-          className='p-2 m-3 border-2 border-orange-500 rounded-full bg-gradient-to-r from-orange-600 to-green-500 font-medium text-white cursor-pointer shadow-xl shadow-orange-500/50 hover:border-green-600 transition-all transform-gpu hover:scale-105'
-        >
-          <AnchorLink
-            className='anchor-link'
-            offset={40}
-            href='#contact'
-          >
-            <p onClick={() => setIsModalOpen(true)}>Connect Me</p>
-          </AnchorLink>
-        </div>
+        <AnchorLink offset='60' href='#contact'>
+          <div className='
+            px-6 py-2 border-2 border-white 
+            rounded-full 
+            font-medium text-white cursor-pointer shadow-md 
+            hover:scale-105 hover:shadow-lg transition-all duration-300
+          '>
+            Connect Me
+          </div>
+        </AnchorLink>
 
         {/* Resume Download Button */}
         <div
           onClick={downloadPDF}
-          className='p-2 m-3 border-2 border-orange-500 rounded-full bg-gradient-to-r from-orange-600 to-green-500 font-medium text-white cursor-pointer shadow-xl shadow-orange-500/50 hover:border-green-600 transition-all transform-gpu hover:scale-105'
+          className='
+            px-6 py-2 border-2 border-white
+            rounded-full 
+            font-medium text-white cursor-pointer shadow-md 
+            hover:scale-105 hover:shadow-lg transition-all duration-300
+          '
         >
           My Resume
         </div>

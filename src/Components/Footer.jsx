@@ -1,36 +1,56 @@
-import React from 'react'
+import React from 'react';
 import { FaUser } from "react-icons/fa";
+import bgimage from '../assets/bg1.avif';
+
 
 const Footer = () => {
   return (
-    <div className='flex flex-col bg-black '>
-        <hr />
-        <div className='flex justify-between '>
-            <div className='text-2xl max-w-2xl'>
-                <img src="" alt="" />
-                <p className='m-20 text-xl text-white'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero ratione tenetur, veniam eveniet
-                    reiciendis adipisci facere commodi voluptatem quia laboriosam laudantium? Ducimus, illo.</p>
-            </div>
-            <div className='flex items-center gap-10 relative m-20'>
-                <div className='bg-black rounded-2xl border-2 text-white'>
-                    {/* icon */}
-                    <FaUser className='absolute top-12 left-2 text-xl text-white'/>
-                    <input className='flex gap-10 ms-8 h-11 ps-3 w-50 rounded-2xl ' type="email" placeholder='Enter your Email' />
-                </div>
-                <div className='bg-gradient-to-r from-orange-600 to-green-500  text-xl p-2 border-2 border-orange-500 rounded-2xl text-white cursor-pointer transition-all transform-gpu hover:scale-105 hover:border-white shadow-md shadow-amber-50'>Subscribe</div>
-            </div>
-        </div>
-        <hr className=' outline-5 border-0 h-0.5 rounded-full bg-white' />
-        <div className='flex justify-between text-md m-3 ms-20 text-white'>
-            <p className=''>@ 2025 Web Developer. All rights</p>
-            <div className='flex gap-20 mb-10 '>
-                <p>Term of Services</p>
-                <p>Privacy Policy</p>
-                <p>Connect with me</p>
-            </div>
-        </div>
-    </div>
-  )
-}
+    <div
+    style={{ backgroundImage: `url(${bgimage})` }}
+    
+     className='bg-cover bg-center bg-no-repeat flex flex-col bg-black text-white px-4 py-8'>
+      <hr className='mb-6 border-gray-600' />
 
-export default Footer
+      {/* Main Footer Section */}
+      <div className='flex flex-col lg:flex-row justify-between items-center gap-10'>
+        
+        {/* Left Content */}
+        <div className='text-center lg:text-left max-w-2xl'>
+          <p className='text-lg sm:text-xl px-4'>
+            I am <strong>Mohd Ateek</strong>, Full Stack Developer and MERN Stack Expert with strong command over MongoDB, Express.js, React.js, and Node.js, both frontend and backend. Skilled in modern UI frameworks like Material UI.
+          </p>
+        </div>
+
+        {/* Subscribe Section */}
+        <div className='flex flex-col sm:flex-row items-center gap-4'>
+          <div className='relative w-full sm:w-auto'>
+            <FaUser className='absolute top-1/2 -translate-y-1/2 left-3 text-white text-lg' />
+            <input
+              className='pl-10 pr-4 h-11 w-full sm:w-64 rounded-2xl border-2 border-white text-white focus:outline-none'
+              type='email'
+              placeholder='Enter your Email'
+            />
+          </div>
+          <div className=' text-lg px-5 py-2 border-2 border-white rounded-2xl cursor-pointer transition-transform hover:scale-105 hover:border-white shadow-sm shadow-amber-50'>
+            Subscribe
+          </div>
+        </div>
+      </div>
+
+      <hr className='my-6 border-gray-600' />
+
+      {/* Bottom Footer Section */}
+      <div className='flex flex-col md:flex-row justify-between items-center text-sm gap-4 px-2'>
+        <p className='text-center'>© 2025 Web Developer. All rights reserved.</p>
+        <p className='text-center'>Developed by <strong>Mohd Ateek</strong></p>
+        <div className='flex flex-col sm:flex-row gap-4 sm:gap-10 text-center'>
+          <p>Terms of Service</p>
+          <p>Privacy Policy</p>
+          <p>Connect with me</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Footer;
