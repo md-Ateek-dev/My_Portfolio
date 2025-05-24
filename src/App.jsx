@@ -7,6 +7,10 @@ import MyWorks from './Components/MyWorks'
 import Contact from './Components/Contact'
 import Footer from './Components/Footer'
 import ContactUs from './Components/ContactUs'
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+// ..
+AOS.init();
 const App = () => {
   return (
     <div>

@@ -6,7 +6,7 @@ import { SiExpress, SiMongodb } from 'react-icons/si';
 
 const AboutUs = () => {
   return (
-    <div
+    <div 
       style={{ backgroundImage: `url(${bgimage})` }}
       id='about'
       className='bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center gap-12 px-4 py-8 bg-gradient-to-r from-purple-500 to-blue-500 text-white w-full'
@@ -17,7 +17,7 @@ const AboutUs = () => {
       </h1>
 
       {/* Image & Text Section */}
-      <div className='flex flex-col md:flex-row items-center justify-center gap-10 w-full max-w-6xl'>
+      <div data-aos="flip-down" className='flex flex-col md:flex-row items-center justify-center gap-10 w-full max-w-6xl'>
         {/* Profile Image */}
         <div className='w-full md:w-1/3 flex justify-center'>
           <img

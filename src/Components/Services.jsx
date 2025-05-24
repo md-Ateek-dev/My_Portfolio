@@ -36,7 +36,8 @@ const Services = () => {
         w-full max-w-7xl
       '>
         {servicesToShow.map((service, index) => (
-          <div
+          <div data-aos="flip-down" data-aos-duration="4000" data-aos-offset="200" data-aos-easing="ease-in-out" data-aos-delay="50"
+
             key={index}
             className='
               relative backdrop-blur-md

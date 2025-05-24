@@ -38,7 +38,9 @@ const MyWorks = () => {
         '
       >
         {worksToShow.map((work, index) => (
-          <div
+          <div data-aos="flip-down" data-aos-duration="4000" data-aos-offset="200" data-aos-easing="ease-in-out" data-aos-delay="50"
+
+
             key={index}
             className='
               relative rounded-xl overflow-hidden shadow-lg

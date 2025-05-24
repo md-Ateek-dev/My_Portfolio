@@ -15,7 +15,7 @@
     "@mui/icons-material": "^6.4.8",
     "@mui/material": "^6.4.8",
     "@tailwindcss/vite": "^4.0.14",
-    "aos": "^2.3.4",
+    "aos": "^3.0.0-beta.6",
     "lucide-react": "^0.511.0",
     "react": "^19.0.0",
     "react-anchor-link-smooth-scroll": "^1.0.12",
