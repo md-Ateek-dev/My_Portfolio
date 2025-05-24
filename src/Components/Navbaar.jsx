@@ -22,7 +22,7 @@ const Navbaar = () => {
         <img src={logo} alt="logo" className='h-9 w-9 border-2 bg-cover bg-center rounded-2xl' />
 
         {/* Desktop Menu */}
-        <ul className='hidden md:flex items-center gap-10 text-lg text-amber-600 font-semibold'>
+        <ul className='hidden md:flex items-center gap-25 text-lg text-amber-600 font-semibold'>
           <li className='hover:text-blue-400'>
             <AnchorLink offset={40} href='#profile'><p onClick={() => handleMenuClick("profile")}>Home</p></AnchorLink>
           </li>
