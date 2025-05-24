@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Services_data from '../assets/Services_data';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import bgimage from '../assets/bg1.avif';
 
 const Services = () => {
+  const [showAll, setShowAll] = useState(false);
+  const servicesToShow = showAll ? Services_data : Services_data.slice(0, 3);
+
   return (
     <div
-        style={{ backgroundImage: `url(${bgimage})` }}
-    
+      style={{ backgroundImage: `url(${bgimage})` }}
       id='services'
       className='
-      bg-cover bg-center bg-no-repeat
+        bg-cover bg-center bg-no-repeat
         bg-gradient-to-r from-purple-500 to-blue-500 
         flex flex-col items-center justify-center
         px-6 py-12 gap-10 w-full min-h-screen
@@ -20,7 +22,7 @@ const Services = () => {
       <h1
         className='
           text-4xl sm:text-5xl font-extrabold 
-         text-white text-center
+          text-white text-center
           hover:scale-105 transition-transform duration-300
           drop-shadow-lg select-none
         '
@@ -33,12 +35,11 @@ const Services = () => {
         grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 
         w-full max-w-7xl
       '>
-        {Services_data.map((service, index) => (
+        {servicesToShow.map((service, index) => (
           <div
             key={index}
             className='
-              relative
-              backdrop-blur-md
+              relative backdrop-blur-md
               rounded-3xl p-8
               shadow-lg shadow-black/40
               cursor-pointer
@@ -54,7 +55,7 @@ const Services = () => {
             <div>
               <h3 className='font-semibold text-sm text-amber-300 tracking-wide'>{service.s_no}</h3>
               <h2 className='text-2xl font-bold mt-2 text-white'>{service.s_name}</h2>
-              <p className='text-sm mt-3 text-gray-200 leading-relaxed'>{service.s_desc}</p>
+              <p className='text-sm mt-3 text-white leading-relaxed'>{service.s_desc}</p>
             </div>
 
             <div className='flex items-center gap-3 mt-6 text-amber-300 hover:text-white transition-colors font-medium select-none'>
@@ -64,6 +65,23 @@ const Services = () => {
           </div>
         ))}
       </div>
+
+      {/* Show More / Less Button */}
+      {Services_data.length > 4 && (
+        <div className='mt-6'>
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className='
+              text-white text-lg font-semibold
+              border border-white px-2 py-2 rounded-full
+              hover:bg-white hover:text-purple-600 transition-all duration-300
+              shadow-md hover:shadow-xl
+            '
+          >
+            {showAll ? 'Show Less' : 'Show More'}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

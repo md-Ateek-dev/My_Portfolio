@@ -1,17 +1,18 @@
 import React from 'react';
 import ProfileImage from '../assets/ProfileImage.png';
-import bgimage from '../assets/bg1.avif';
+import bgimage from '../assets/bg15.jpg';
+import { FaHtml5, FaJsSquare, FaBootstrap, FaReact, FaNodeJs, FaCss3Alt } from 'react-icons/fa';
+import { SiExpress, SiMongodb } from 'react-icons/si';
 
 const AboutUs = () => {
   return (
     <div
-        style={{ backgroundImage: `url(${bgimage})` }}
-    
+      style={{ backgroundImage: `url(${bgimage})` }}
       id='about'
       className='bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center gap-12 px-4 py-8 bg-gradient-to-r from-purple-500 to-blue-500 text-white w-full'
     >
       {/* Heading */}
-      <h1 className='text-3xl sm:text-4xl font-bold  text-center hover:scale-105 transition-transform'>
+      <h1 className='text-3xl sm:text-4xl font-bold text-center hover:scale-105 transition-transform'>
         About Me
       </h1>
 
@@ -44,19 +45,21 @@ const AboutUs = () => {
           {/* Skills Progress */}
           <div className='flex flex-col gap-4'>
             {[
-              ['HTML & CSS', 100],
-              ['JavaScript', 80],
-              ['Bootstrap', 100],
-              ['React.js', 70],
-              ['Node.js', 80],
-              ['Express.js', 80],
-              ['MongoDB', 90],
-            ].map(([skill, percent], index) => (
+              [<FaHtml5 className='text-yellow-400 text-2xl' />,<FaCss3Alt className='text-yellow-400'/>,100],
+              [<FaJsSquare className='text-yellow-400 text-2xl' />,80],
+              [<FaBootstrap className='text-indigo-600 text-2xl' />,100],
+              [<FaReact className='text-emerald-800 text-2xl' />,70],
+              [<FaNodeJs className='text-green-400 text-2xl' />,80],
+              [<SiExpress className='text-blue-200 text-2xl' />,80],
+              [<SiMongodb className='text-green-400 text-2xl' />,90],
+            ].map(([Icon, skill, percent], index) => (
               <div
                 key={index}
                 className='flex flex-col sm:flex-row sm:items-center gap-2 font-medium hover:scale-[1.02] transition-transform'
               >
-                <p className='w-full sm:w-40'>{skill} {percent}%</p>
+                <p className='w-full sm:w-40 flex items-center gap-2'>
+                  {Icon} {skill} {percent}%
+                </p>
                 <hr
                   className='w-full h-2 rounded-full border-0 outline-none bg-white'
                   style={{ width: `${percent}%` }}

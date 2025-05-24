@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaUser } from "react-icons/fa";
-import bgimage from '../assets/bg1.avif';
+import bgimage from '../assets/bg15.jpg';
 
 
 const Footer = () => {

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import ProfileImage from '../assets/ProfileImage.png';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
-import bgimage from '../assets/bg1.avif'
+import bgimage from '../assets/bg15.jpg'
 
 const Profile = () => {
   const downloadPDF = () => {
     const link = document.createElement('a');
-    link.href = 'https://drive.google.com/uc?export=download&id=1mqorA5SnoM5r8-YNmbVB1p7Vba9k2Wpb';
+    link.href = 'https://drive.google.com/file/d/1mqorA5SnoM5r8-YNmbVB1p7Vba9k2Wpb/view?usp=drivesdk';
     link.download = 'MyResume.pdf';
     document.body.appendChild(link);
     link.click();
@@ -31,7 +31,7 @@ const Profile = () => {
         alt='Profile'
         className='
           w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 
-          rounded-full object-cover border-4 border-white 
+          rounded-full bg-cover bg-center border-4 border-white 
           shadow-xl mt-8 hover:scale-105 transition-transform
           z-10
         '
@@ -51,7 +51,7 @@ const Profile = () => {
         text-lg sm:text-xl md:text-2xl font-medium text-center text-white 
         max-w-2xl px-4
       '>
-        Full Stack Developer | MERN Stack Specialist
+       Hi, I'm Mohd Ateek a passionate MERN stack developer and frontend specialist. I love building user-friendly web applications with modern design and clean code.
       </p>
 
       {/* Action Buttons */}

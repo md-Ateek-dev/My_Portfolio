@@ -15,7 +15,7 @@ const ContactUs = () => {
       {/* Floating Side Button */}
       <button
         onClick={() => setIsModalOpen(true)}
-        className="bg-blue-600 text-white px-4 py-4 sm:px-5 sm:py-5 rounded-xl shadow-md hover:bg-blue-700 transition fixed top-1/2 right-2 sm:right-6 -translate-y-1/2 me-3 mt-5 rotate-[-90deg] origin-right z-1"
+        className="bg-blue-600 text-white px-3 py-3 sm:px-3 sm:py-3 rounded-xl shadow-md hover:bg-blue-700 transition fixed top-1/2 right-2 sm:right-6 -translate-y-1/2 me-2 mt-5 rotate-[-90deg] origin-right z-1"
       >
         Contact Us
       </button>

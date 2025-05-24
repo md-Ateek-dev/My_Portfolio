@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MyWork from '../assets/MyWork';
 import { IoIosArrowRoundForward, IoIosArrowRoundBack } from 'react-icons/io';
-import bgimage from '../assets/bg1.avif';
+import bgimage from '../assets/bg15.jpg';
 
 const MyWorks = () => {
   const [showAll, setShowAll] = useState(false);
@@ -82,19 +82,22 @@ const MyWorks = () => {
             <button
               onClick={() => setShowAll(false)}
               className='
-                group flex items-center gap-2 
-                px-6 py-3 rounded-full text-white text-xl font-semibold
+                group flex items-center gap-1 
+                px-3 py-3 rounded-full text-white text-xl font-semibold
                 border-1
                 hover:shadow-ms hover:border-white
+                hover:bg-white
+                hover:text-blue-600
                 transition-all duration-300
                 select-none
                 focus:outline-none focus:ring-1
+                
               '
             >
               <IoIosArrowRoundBack
                 className='
-                  mr-1 text-2xl transition-transform duration-500
-                  group-hover:-translate-x-3
+                  text-2xl transition-transform duration-500
+                  group-hover:-translate-x-1
                 '
               />
               Show Less
@@ -103,10 +106,11 @@ const MyWorks = () => {
             <button
               onClick={() => setShowAll(true)}
               className='
-                group flex items-center gap-2 
-                px-6 py-3 rounded-full text-white text-xl font-semibold
+                group flex items-center gap-1 
+                px-2 py-2 rounded-full text-white text-xl font-semibold
                 border-1
                 hover:shadow-ms hover:border-white
+                hover:bg-blue-600
                 transition-all duration-300
                 select-none
                 focus:outline-none focus:ring-1
@@ -115,8 +119,8 @@ const MyWorks = () => {
               Show More
               <IoIosArrowRoundForward
                 className='
-                  ml-1 text-2xl transition-transform duration-500
-                  group-hover:translate-x-3
+                   text-2xl transition-transform duration-500
+                  group-hover:translate-x-1
                 '
               />
             </button>

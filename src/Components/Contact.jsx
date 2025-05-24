@@ -3,7 +3,7 @@ import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { IoLocationSharp } from "react-icons/io5";
 import { CiFacebook } from "react-icons/ci";
-import bgimage1 from '../assets/bg1.avif';
+import bgimage1 from '../assets/bg12.avif';
 
 const Contact = () => {
   const [result, setResult] = React.useState("");
@@ -33,7 +33,6 @@ const Contact = () => {
   return (
     <div
                 style={{ backgroundImage: `url(${bgimage1})` }}
-    
      id='contact' className='bg-cover bg-center bg-no-repeat bg-gradient-to-r from-purple-500 to-blue-500 py-16 px-4 flex flex-col items-center gap-12'>
       <h1 className='text-3xl sm:text-4xl font-bold text-white transition-transform hover:scale-105'>
         Contact Us
@@ -81,57 +80,57 @@ const Contact = () => {
         {/* Contact Form */}
         <form
           onSubmit={onSubmit}
-          className='w-full max-w-xl p-6 rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-shadow duration-300'
+          className='w-full max-w-xl p-6 rounded-2xl bg-transparent shadow-lg hover:shadow-2xl transition-shadow duration-300'
         >
-          <h2 className='text-xl sm:text-2xl font-bold text-blue-700 mb-6 text-center'>Contact Form</h2>
+          <h2 className='text-2xl sm:text-2xl font-bold text-white mb-6 text-center'>Contact Form</h2>
 
           <div className='mb-4'>
-            <label className='block text-gray-700 text-sm font-medium mb-1'>Name</label>
+            <label className='block text-white text-sm font-medium mb-1'>Name</label>
             <input
               type='text'
               name='name'
               placeholder='Enter Your Name'
-              className='w-full h-10 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400'
+              className='placeholder-white w-full h-10 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400'
               required
             />
           </div>
 
           <div className='mb-4'>
-            <label className='block text-gray-700 text-sm font-medium mb-1'>Number</label>
+            <label className='block text-white text-sm font-medium mb-1'>Number</label>
             <input
               type='number'
               name='number'
               placeholder='Enter Your Number'
-              className='w-full h-10 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400'
+              className='placeholder-white w-full h-10 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400'
               required
             />
           </div>
 
           <div className='mb-4'>
-            <label className='block text-gray-700 text-sm font-medium mb-1'>Email</label>
+            <label className='block text-white text-sm font-medium mb-1'>Email</label>
             <input
               type='email'
               name='email'
               placeholder='Enter Your Email'
-              className='w-full h-10 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400'
+              className='placeholder-white w-full h-10 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400'
               required
             />
           </div>
 
           <div className='mb-4'>
-            <label className='block text-gray-700 text-sm font-medium mb-1'>Message</label>
+            <label className='block text-white text-sm font-medium mb-1'>Message</label>
             <textarea
               name='message'
               rows='3'
               placeholder='Enter Your Message'
-              className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none'
+              className='placeholder-white w-full px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none'
               required
             ></textarea>
           </div>
 
           <button
             type='submit'
-            className='w-full bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-2 rounded-full border-2 shadow-md hover:shadow-xl transition-all duration-500'
+            className='w-full bg-transparent hover:bg-white hover:text-blue-600 text-white text-lg font-semibold py-2 rounded-full border-2 shadow-md hover:shadow-xl transition-all duration-500'
           >
             Submit Now
           </button>

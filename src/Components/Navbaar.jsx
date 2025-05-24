@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../assets/logo.png';
+import logo from '../assets/ProfileImage.png';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { Menu, X } from 'lucide-react'; // Optional: You can use any icon set
 
@@ -17,9 +17,9 @@ const Navbaar = () => {
   };
 
   return (
-    <div id='navbaar' className='w-full fixed z-50 bg-gray-900 text-white'>
+    <div id='navbaar' className='w-full fixed z-50 bg-gray-700 text-white'>
       <div className='flex items-center justify-between px-4 h-20'>
-        <img src={logo} alt="logo" className='h-10 border-2 rounded-2xl' />
+        <img src={logo} alt="logo" className='h-9 w-9 border-2 bg-cover bg-center rounded-2xl' />
 
         {/* Desktop Menu */}
         <ul className='hidden md:flex items-center gap-10 text-lg text-amber-600 font-semibold'>
@@ -36,12 +36,12 @@ const Navbaar = () => {
             <AnchorLink offset={40} href='#work'><p onClick={() => handleMenuClick("work")}>Project</p></AnchorLink>
           </li>
           <li className='hover:text-blue-400'>
-            <AnchorLink offset={40} href='#contact'><p onClick={() => handleMenuClick("contact")}>Contact</p></AnchorLink>
+            <AnchorLink offset={40} href='#contact'><p onClick={() => handleMenuClick("contact")}>Contact Us</p></AnchorLink>
           </li>
         </ul>
 
         {/* Connect Button */}
-        <div className='hidden md:block p-2 rounded-3xl cursor-pointer bg-gradient-to-r from-orange-600 to-green-500 text-white font-medium transition-all transform-gpu hover:scale-105'>
+        <div className='hidden md:block p-2 rounded-3xl cursor-pointer bg-gray-500 font-medium transition-all transform-gpu hover:scale-105'>
           <AnchorLink offset={40} href='#contact'>
             <p onClick={() => handleMenuClick("contact")}>Connect with Me</p>
           </AnchorLink>
