@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Send, User, MessageSquare, Linkedin, Instagram, Facebook, GitBranch, Github } from 'lucide-react';
+import { FaSquareWhatsapp } from "react-icons/fa6";
 
 const Contact = () => {
   const [result, setResult] = useState("");
@@ -185,6 +186,14 @@ const Contact = () => {
                   className="p-4 bg-black hover:bg-slate-800 rounded-2xl transition-all duration-300 hover:scale-110 group"
                 >
                   <Github className="w-6 h-6 text-white group-hover:text-white" />
+                </a>
+                <a 
+                  href="https://wa.me/message/ANXSMJIEXO3GF1" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-4 bg-black hover:bg-slate-800 rounded-2xl transition-all duration-300 hover:scale-110 group"
+                >
+                  <FaSquareWhatsapp className="w-6 h-6 text-green-600 group-hover:text-green-700" />
                 </a>
               </div>
             </div>

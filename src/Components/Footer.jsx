@@ -49,9 +49,9 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub', color: 'hover:text-gray-300' },
+    { icon: Github, href: 'https://github.com/md-Ateek-dev/My_Portfolio', label: 'GitHub', color: 'hover:text-gray-300' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/mohd-ateek-80a949256', label: 'LinkedIn', color: 'hover:text-blue-400' },
-    { icon: Twitter, href: '#', label: 'Twitter', color: 'hover:text-blue-300' },
+    { icon: Twitter, href: 'https://x.com/md_Ateek09?t=K769gdOSAwL-Kihfm-GSnA&s=09', label: 'Twitter', color: 'hover:text-blue-300' },
     { icon: Instagram, href: 'https://www.instagram.com/md_ateek09?igsh=ajZjNnFreWhwYWgx', label: 'Instagram', color: 'hover:text-pink-400' }
   ];
 
