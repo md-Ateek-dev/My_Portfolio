@@ -55,7 +55,7 @@ const AboutUs = () => {
       <div className='relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-16'>
         {/* Main Heading */}
         <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h1 className='text-5xl md:text-7xl font-bold text-center mb-4 text-white animate-pulse'>
+          <h1 id='heading' className='text-5xl md:text-7xl font-bold text-center mb-4 text-white animate-pulse'>
             About Me
           </h1>
           <div className='w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto rounded-full'></div>

@@ -119,7 +119,13 @@ const Profile = () => {
 
           {/* Name with Letter Animation */}
           <div className="mb-8">
-            <h1 id='Profile_heading' className="text-5xl md:text-7xl lg:text-8xl font-bold text-red-700 mb-4 tracking-tight">
+            
+            {/* Heading */}
+            
+            <h1 id='heading' className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 tracking-tight">
+              
+             {/* Heading */}
+
               {Array.from("Mohd Ateek").map((char, index) => (
                 <span
                   key={index}
