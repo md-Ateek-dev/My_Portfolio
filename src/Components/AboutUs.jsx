@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaHtml5, FaJsSquare, FaBootstrap, FaReact, FaNodeJs, FaCss3Alt } from 'react-icons/fa';
 import { SiExpress, SiMongodb } from 'react-icons/si';
-
+import profile from '../assets/ProfileImage.png';
 const AboutUs = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [skillsAnimated, setSkillsAnimated] = useState(false);
@@ -72,7 +72,7 @@ const AboutUs = () => {
               
               {/* Profile Image Placeholder */}
               <div className='relative w-80 h-80 bg-gradient-to-br from-slate-800 to-slate-700 rounded-2xl flex items-center justify-center border border-slate-600 group-hover:scale-105 transition-transform duration-500'>
-                <div className='text-slate-400 text-6xl'> <img className='bg-cover bg-center h-80 w-80 rounded-2xl' src="/src/assets/ProfileImage.png" alt="ateek" /></div>
+                <div className='text-slate-400 text-6xl'> <img className='bg-cover bg-center h-80 w-80 rounded-2xl' src={profile} alt="ateek" /></div>
                 <div className='absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-purple-500/10 rounded-2xl'></div>
               </div>
             </div>

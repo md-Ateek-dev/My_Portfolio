@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import profile from '../assets/ProfileImage.png'; // Adjust the path as necessary''
 
 const Profile = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -101,7 +101,7 @@ const Profile = () => {
               {/* Profile Image */}
               <div className="relative">
                 <img
-                  src="/src/assets/ProfileImage.png"
+                  src={profile}
                   alt="Mohd Ateek"
                   className="
                     w-40 h-40 md:w-56 md:h-56 lg:w-64 lg:h-64 mt-15
