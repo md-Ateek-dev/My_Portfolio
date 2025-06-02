@@ -62,7 +62,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
+    <div id='contact' className="min-h-screen bg-black relative overflow-hidden">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0">
         {/* Animated Grid */}
@@ -99,7 +99,7 @@ const Contact = () => {
         <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20">
           
           {/* Contact Info Card */}
-          <div className="space-y-6 sm:space-y-8 order-2 lg:order-1">
+          <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50"  className="space-y-6 sm:space-y-8 order-2 lg:order-1">
             {/* Info Card */}
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 hover:bg-white/10 transition-all duration-500 group">
               <div className="space-y-6 sm:space-y-8">
@@ -151,7 +151,7 @@ const Contact = () => {
             </div>
 
             {/* Social Links */}
-            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8">
+            <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50"  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8">
               <h3 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6">Connect on Social</h3>
               <div className="flex flex-wrap gap-3 sm:gap-4">
                 <a 
@@ -199,7 +199,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 hover:bg-white/10 transition-all duration-500 order-1 lg:order-2">
+          <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 hover:bg-white/10 transition-all duration-500 order-1 lg:order-2">
             <div className="space-y-4 sm:space-y-6">
               <div className="text-center mb-6 sm:mb-8">
                 <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">Send Message</h2>

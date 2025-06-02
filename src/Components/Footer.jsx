@@ -96,7 +96,7 @@ const Footer = () => {
           <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
             
             {/* About Section */}
-            <div className="lg:col-span-2 space-y-8">
+            <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="lg:col-span-2 space-y-8">
               <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500">
                 <div className="flex items-start gap-4 mb-6">
                   <div className="p-3 bg-blue-500/20 rounded-2xl">
@@ -128,7 +128,7 @@ const Footer = () => {
               </div>
 
               {/* Quick Links */}
-              <div className="grid md:grid-cols-2 gap-8">
+              <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="grid md:grid-cols-2 gap-8">
                 <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                   <h3 className="text-xl font-semibold text-white mb-4">Quick Links</h3>
                   <div className="space-y-3">
@@ -164,7 +164,7 @@ const Footer = () => {
             </div>
 
             {/* Newsletter Section */}
-            <div className="space-y-8">
+            <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="space-y-8">
               <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500">
                 <div className="text-center mb-6">
                   <div className="p-4 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl w-fit mx-auto mb-4">
@@ -210,7 +210,7 @@ const Footer = () => {
               </div>
 
               {/* Social Links */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+              <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                 <h3 className="text-xl font-semibold text-white mb-4 text-center">Connect With Me</h3>
                 <div className="flex justify-center gap-4">
                   {socialLinks.map((social) => (

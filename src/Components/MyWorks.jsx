@@ -122,7 +122,7 @@ const MyWorks = () => {
         </div>
 
         {/* Filter Tabs */}
-        <div className={`flex flex-wrap justify-center gap-4 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{transitionDelay: '200ms'}}>
+        <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className={`flex flex-wrap justify-center gap-4 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{transitionDelay: '200ms'}}>
           {categories.map((category, index) => (
             <button
               key={category}
@@ -139,7 +139,7 @@ const MyWorks = () => {
         </div>
 
         {/* Works Grid */}
-        <div 
+        <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50"
           ref={containerRef}
           className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl w-full'
         >

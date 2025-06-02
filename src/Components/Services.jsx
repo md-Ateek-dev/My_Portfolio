@@ -87,13 +87,13 @@ const Services = () => {
             </h1>
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full"></div>
           </div>
-          <p className="text-gray-400 text-lg mt-8 max-w-2xl mx-auto leading-relaxed">
+          <p data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="text-gray-400 text-lg mt-8 max-w-2xl mx-auto leading-relaxed">
             Transforming ideas into digital excellence with cutting-edge solutions and innovative approaches
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl'>
+        <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl'>
           {servicesToShow.map((service, index) => {
             const IconComponent = service.icon;
             return (

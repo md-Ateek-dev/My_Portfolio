@@ -97,20 +97,21 @@ const Profile = () => {
             <div className="relative">
               {/* Simple Glow Effect */}
               <div className="absolute -inset-2 bg-white/5 rounded-full blur-lg group-hover:bg-white/10 transition-all duration-500"></div>
-              
-              {/* Profile Image */}
-              <div className="relative">
-                <img
-                  src={profile}
-                  alt="Mohd Ateek"
-                  className="
-                    w-40 h-40 md:w-56 md:h-56 lg:w-64 lg:h-64 mt-15
-                    rounded-full bg-cover bg-center border-2 border-gray-800
-                    transform transition-all duration-300 ease-out
-                    group-hover:border-gray-600 group-hover:shadow-xl group-hover:shadow-white/5
-                  "
-                />
-              </div>
+             {/* Profile Image */}
+<div className="flex justify-center items-center mt-10">
+  <img
+    src={profile}
+    alt="Mohd Ateek"
+    className="
+      w-40 h-40 md:w-56 md:h-56 lg:w-64 lg:h-64
+      rounded-full bg-cover bg-center object-center
+      border-2 border-gray-800
+      transform transition-all duration-300 ease-out
+      group-hover:border-gray-600 group-hover:shadow-xl group-hover:shadow-white/5
+    "
+  />
+</div>
+
               
               {/* Status Indicator */}
               <div className="absolute bottom-2 right-2 w-5 h-5 bg-green-400 rounded-full border-3 border-black shadow-lg"></div>

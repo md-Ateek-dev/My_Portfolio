@@ -4,7 +4,9 @@
 body{
   width: 100%;
   overflow-x: hidden;
-
+margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 #heading {
   font-family: "Arizonia", cursive;
@@ -12,4 +14,9 @@ body{
   font-style: normal;
 }
 
-
+#favicon{
+  border-radius:"50%";
+}
+.icon{
+  border-radius: 50%;
+}
