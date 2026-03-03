@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Mail, User, ArrowRight, Github, Linkedin, Twitter, Instagram, Code, Heart, ChevronUp } from 'lucide-react';
+import { PortfolioContext } from '../PortfolioContext';
 
 const Footer = () => {
+  const { setIsAdminOpen } = useContext(PortfolioContext);
+
   const [email, setEmail] = useState('');
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [subscriptionResult, setSubscriptionResult] = useState('');
@@ -19,7 +22,7 @@ const Footer = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll);
-    
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
@@ -73,13 +76,13 @@ const Footer = () => {
       {/* Dynamic Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800"></div>
-        <div 
+        <div
           className="absolute inset-0 opacity-20"
           style={{
             background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.1), transparent 50%)`
           }}
         ></div>
-        
+
         {/* Animated Elements */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -94,9 +97,9 @@ const Footer = () => {
         {/* Main Footer Content */}
         <div className="max-w-7xl mx-auto px-4 py-16">
           <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
-            
+
             {/* About Section */}
-            <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="lg:col-span-2 space-y-8">
+            <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="lg:col-span-2 space-y-8">
               <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500">
                 <div className="flex items-start gap-4 mb-6">
                   <div className="p-3 bg-blue-500/20 rounded-2xl">
@@ -107,17 +110,17 @@ const Footer = () => {
                     <p className="text-blue-400 font-medium">Full Stack Developer & MERN Expert</p>
                   </div>
                 </div>
-                
+
                 <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                  Passionate Full Stack Developer specializing in MERN stack technologies. 
-                  I create modern, scalable web applications with expertise in MongoDB, Express.js, 
+                  Passionate Full Stack Developer specializing in MERN stack technologies.
+                  I create modern, scalable web applications with expertise in MongoDB, Express.js,
                   React.js, and Node.js. Let's build something amazing together.
                 </p>
 
                 {/* Skills Tags */}
                 <div className="flex flex-wrap gap-2">
                   {['React.js', 'Node.js', 'MongoDB', 'Express.js', 'Material UI', 'JavaScript', 'TypeScript'].map((skill) => (
-                    <span 
+                    <span
                       key={skill}
                       className="px-3 py-1 bg-white/10 rounded-full text-sm text-gray-300 hover:bg-white/20 transition-all duration-300"
                     >
@@ -128,12 +131,12 @@ const Footer = () => {
               </div>
 
               {/* Quick Links */}
-              <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="grid md:grid-cols-2 gap-8">
+              <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="grid md:grid-cols-2 gap-8">
                 <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                   <h3 className="text-xl font-semibold text-white mb-4">Quick Links</h3>
                   <div className="space-y-3">
                     {quickLinks.map((link) => (
-                      <a 
+                      <a
                         key={link.label}
                         href={link.href}
                         className="flex items-center gap-2 text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300 group"
@@ -149,7 +152,7 @@ const Footer = () => {
                   <h3 className="text-xl font-semibold text-white mb-4">Legal</h3>
                   <div className="space-y-3">
                     {legalLinks.map((link) => (
-                      <a 
+                      <a
                         key={link.label}
                         href={link.href}
                         className="flex items-center gap-2 text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300 group"
@@ -164,7 +167,7 @@ const Footer = () => {
             </div>
 
             {/* Newsletter Section */}
-            <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="space-y-8">
+            <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="space-y-8">
               <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500">
                 <div className="text-center mb-6">
                   <div className="p-4 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl w-fit mx-auto mb-4">
@@ -196,13 +199,12 @@ const Footer = () => {
                   </button>
 
                   {subscriptionResult && (
-                    <div className={`text-center p-3 rounded-xl ${
-                      subscriptionResult.includes('Thank you') 
-                        ? 'bg-green-500/20 text-green-300 border border-green-500/20' 
-                        : subscriptionResult.includes('Please') 
+                    <div className={`text-center p-3 rounded-xl ${subscriptionResult.includes('Thank you')
+                      ? 'bg-green-500/20 text-green-300 border border-green-500/20'
+                      : subscriptionResult.includes('Please')
                         ? 'bg-red-500/20 text-red-300 border border-red-500/20'
                         : 'bg-blue-500/20 text-blue-300 border border-blue-500/20'
-                    }`}>
+                      }`}>
                       {subscriptionResult}
                     </div>
                   )}
@@ -210,7 +212,7 @@ const Footer = () => {
               </div>
 
               {/* Social Links */}
-              <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+              <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                 <h3 className="text-xl font-semibold text-white mb-4 text-center">Connect With Me</h3>
                 <div className="flex justify-center gap-4">
                   {socialLinks.map((social) => (
@@ -238,15 +240,21 @@ const Footer = () => {
               <div className="flex items-center gap-2 text-gray-400">
                 <span>© 2025 Mohd Ateek. All rights reserved.</span>
               </div>
-              
+
               <div className="flex items-center gap-2 text-gray-400">
                 <span>Made with</span>
                 <Heart className="w-4 h-4 text-red-400 animate-pulse" />
                 <span>by Mohd Ateek</span>
               </div>
-              
-              <div className="text-sm text-gray-500">
+
+              <div className="flex items-center gap-4 text-sm text-gray-500">
                 <span>Full Stack Developer</span>
+                <button
+                  onClick={() => setIsAdminOpen(true)}
+                  className="px-4 py-1.5 bg-gray-800/80 border border-gray-700 hover:bg-gray-700 hover:border-cyan-500/50 text-gray-500 hover:text-cyan-400 rounded-lg transition-all duration-300 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                >
+                  🔐 Admin
+                </button>
               </div>
             </div>
           </div>

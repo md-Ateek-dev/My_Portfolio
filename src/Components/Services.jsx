@@ -10,13 +10,13 @@ const Services_data = [
     icon: FaCode,
     color: "from-blue-500 to-cyan-500"
   },
-  {
-    s_no: "02", 
-    s_name: "Mobile Development",
-    s_desc: "Building cross-platform mobile applications that provide seamless user experiences.",
-    icon: FaMobile,
-    color: "from-purple-500 to-pink-500"
-  },
+  // {
+  //   s_no: "02", 
+  //   s_name: "Mobile Development",
+  //   s_desc: "Building cross-platform mobile applications that provide seamless user experiences.",
+  //   icon: FaMobile,
+  //   color: "from-purple-500 to-pink-500"
+  // },
   {
     s_no: "03",
     s_name: "UI/UX Design",

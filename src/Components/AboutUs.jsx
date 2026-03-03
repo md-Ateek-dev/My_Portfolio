@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { FaHtml5, FaJsSquare, FaBootstrap, FaReact, FaNodeJs, FaCss3Alt } from 'react-icons/fa';
-import { SiExpress, SiMongodb } from 'react-icons/si';
+import React, { useState, useEffect, useContext } from 'react';
+import { PortfolioContext } from '../PortfolioContext';
+import * as FaIcons from 'react-icons/fa';
+import * as SiIcons from 'react-icons/si';
 import profile from '../assets/ProfileImage.png';
+
 const AboutUs = () => {
+  const { skills, stats } = useContext(PortfolioContext);
+
   const [isVisible, setIsVisible] = useState(false);
   const [skillsAnimated, setSkillsAnimated] = useState(false);
 
@@ -12,30 +16,31 @@ const AboutUs = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const skills = [
-    { icon: <FaHtml5 className='text-orange-500' />, name: 'HTML5', percent: 100, color: 'from-orange-500 to-red-500' },
-    { icon: <FaCss3Alt className='text-blue-500' />, name: 'CSS3', percent: 100, color: 'from-blue-500 to-cyan-500' },
-    { icon: <FaJsSquare className='text-yellow-400' />, name: 'JavaScript', percent: 80, color: 'from-yellow-400 to-orange-400' },
-    { icon: <FaBootstrap className='text-purple-600' />, name: 'Bootstrap', percent: 100, color: 'from-purple-600 to-indigo-600' },
-    { icon: <FaReact className='text-cyan-400' />, name: 'React', percent: 70, color: 'from-cyan-400 to-blue-400' },
-    { icon: <FaNodeJs className='text-green-500' />, name: 'Node.js', percent: 80, color: 'from-green-500 to-emerald-500' },
-    { icon: <SiExpress className='text-gray-300' />, name: 'Express', percent: 80, color: 'from-gray-300 to-gray-500' },
-    { icon: <SiMongodb className='text-green-600' />, name: 'MongoDB', percent: 90, color: 'from-green-600 to-green-400' }
+  const statsArray = [
+    { number: stats.experience, label: 'YEAR OF EXPERIENCE', delay: '0ms' },
+    { number: stats.projects, label: 'PROJECTS COMPLETED', delay: '200ms' },
+    { number: stats.clients, label: 'HAPPY CLIENTS', delay: '400ms' }
   ];
 
-  const stats = [
-    { number: '1+', label: 'YEAR OF EXPERIENCE', delay: '0ms' },
-    { number: '5+', label: 'PROJECTS COMPLETED', delay: '200ms' },
-    { number: 'Pending..', label: 'HAPPY CLIENTS', delay: '400ms' }
-  ];
+  const renderIcon = (iconName) => {
+    if (iconName.startsWith('Fa') && FaIcons[iconName]) {
+      const Icon = FaIcons[iconName];
+      return <Icon />;
+    }
+    if (iconName.startsWith('Si') && SiIcons[iconName]) {
+      const Icon = SiIcons[iconName];
+      return <Icon />;
+    }
+    return <FaIcons.FaCode />;
+  };
 
   return (
     <div id='aboutus' className='relative min-h-screen bg-black'>
       {/* Animated Background Elements */}
       <div className='absolute inset-0'>
         <div className='absolute top-20 left-20 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl animate-pulse'></div>
-        <div className='absolute bottom-20 right-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse' style={{animationDelay: '1s'}}></div>
-        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl animate-pulse' style={{animationDelay: '2s'}}></div>
+        <div className='absolute bottom-20 right-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse' style={{ animationDelay: '1s' }}></div>
+        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl animate-pulse' style={{ animationDelay: '2s' }}></div>
       </div>
 
       {/* Floating Particles */}
@@ -63,15 +68,15 @@ const AboutUs = () => {
 
         {/* Main Content */}
         <div className='flex flex-col lg:flex-row items-center justify-center gap-16 w-full max-w-7xl mt-16'>
-          
+
           {/* Profile Section */}
           <div className={`w-full lg:w-1/3 flex flex-col items-center transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
             <div className='relative group'>
               {/* Glowing Border Effect */}
               <div className='absolute rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse'></div>
-              
+
               {/* Profile Image Placeholder */}
-              <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className='relative w-80 h-80 bg-gradient-to-br from-slate-800 to-slate-700 rounded-2xl flex items-center justify-center border border-slate-600 group-hover:scale-105 transition-transform duration-500'>
+              <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className='relative w-80 h-80 bg-gradient-to-br from-slate-800 to-slate-700 rounded-2xl flex items-center justify-center border border-slate-600 group-hover:scale-105 transition-transform duration-500'>
                 <div className='text-slate-400 text-6xl'> <img className='bg-cover bg-center h-80 w-80 rounded-2xl' src={profile} alt="ateek" /></div>
                 <div className='absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-purple-500/10 rounded-2xl'></div>
               </div>
@@ -80,11 +85,11 @@ const AboutUs = () => {
 
           {/* Content Section */}
           <div className={`w-full lg:w-2/3 space-y-12 transform transition-all duration-1000 delay-500 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
-            
-            {/* Introduction */}
-            <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50"
 
- className='backdrop-blur-sm bg-white/5 rounded-2xl p-8 border border-white/10 shadow-2xl hover:bg-white/10 transition-all duration-500'>
+            {/* Introduction */}
+            <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50"
+
+              className='backdrop-blur-sm bg-white/5 rounded-2xl p-8 border border-white/10 shadow-2xl hover:bg-white/10 transition-all duration-500'>
               <p className='text-xl md:text-2xl leading-relaxed text-gray-200'>
                 <span className='text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent'>
                   "I'm Mohd Ateek"
@@ -97,31 +102,31 @@ const AboutUs = () => {
             </div>
 
             {/* Skills Section */}
-            <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50"
- className='backdrop-blur-sm bg-white/5 rounded-2xl p-8 border border-white/10 shadow-2xl'>
+            <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50"
+              className='backdrop-blur-sm bg-white/5 rounded-2xl p-8 border border-white/10 shadow-2xl'>
               <h3 className='text-2xl font-bold text-white mb-8 flex items-center gap-3'>
                 <span className='w-2 h-8 bg-gradient-to-b from-cyan-400 to-purple-500 rounded-full'></span>
                 Technical Skills
               </h3>
-              
+
               <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                 {skills.map((skill, index) => (
                   <div key={index} className='group hover:scale-105 transition-transform duration-300'>
                     <div className='flex items-center justify-between mb-3'>
                       <div className='flex items-center gap-3 text-white'>
-                        <span className='text-2xl group-hover:scale-110 transition-transform duration-300'>
-                          {skill.icon}
+                        <span className={`text-2xl group-hover:scale-110 transition-transform duration-300 ${skill.color ? 'text-transparent bg-clip-text bg-gradient-to-r ' + skill.color : ''}`}>
+                          {renderIcon(skill.iconName)}
                         </span>
                         <span className='font-medium'>{skill.name}</span>
                       </div>
                       <span className='text-cyan-300 font-bold'>{skill.percent}%</span>
                     </div>
-                    
+
                     <div className='w-full bg-slate-700 rounded-full h-3 overflow-hidden'>
                       <div className='h-full bg-slate-600 rounded-full relative overflow-hidden'>
-                        <div 
+                        <div
                           className={`h-full bg-gradient-to-r ${skill.color} rounded-full transition-all duration-1000 ease-out relative`}
-                          style={{ 
+                          style={{
                             width: skillsAnimated ? `${skill.percent}%` : '0%',
                             transitionDelay: `${index * 100}ms`
                           }}
@@ -138,9 +143,9 @@ const AboutUs = () => {
         </div>
 
         {/* Stats Section */}
-        <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className='flex flex-col md:flex-row items-center justify-center gap-12 mt-20 w-full max-w-5xl'>
-          {stats.map((stat, index) => (
-            <div 
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className='flex flex-col md:flex-row items-center justify-center gap-12 mt-20 w-full max-w-5xl'>
+          {statsArray.map((stat, index) => (
+            <div
               key={index}
               className={`text-center group cursor-pointer transform transition-all duration-700 hover:scale-110 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
               style={{ transitionDelay: stat.delay }}
