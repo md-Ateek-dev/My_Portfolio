@@ -8,10 +8,10 @@ const Profile = () => {
 
   useEffect(() => {
     setIsVisible(true);
-    
+
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll);
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -25,7 +25,7 @@ const Profile = () => {
 
   const downloadPDF = () => {
     const link = document.createElement('a');
-    link.href = 'https://drive.google.com/file/d/1mqorA5SnoM5r8-YNmbVB1p7Vba9k2Wpb/view?usp=drivesdk';
+    link.href = 'https://drive.google.com/file/d/1D7cdUZ4RM7Z_UpcM-pkje04VcmPHQgP7/view?usp=drivesdk';
     link.download = 'MyResume.pdf';
     document.body.appendChild(link);
     link.click();
@@ -46,7 +46,7 @@ const Profile = () => {
       onMouseMove={handleMouseMove}
     >
       {/* Dynamic Background Grid */}
-      <div 
+      <div
         className="absolute inset-0 opacity-30"
         style={{
           backgroundImage: `
@@ -67,7 +67,7 @@ const Profile = () => {
         <div className="absolute top-40 right-20 w-1 h-1 bg-gray-400 rounded-full animate-float-delay opacity-40"></div>
         <div className="absolute bottom-32 left-1/4 w-3 h-3 bg-gray-300 rounded-full animate-float-slow opacity-30"></div>
         <div className="absolute top-1/2 right-10 w-2 h-2 bg-white rounded-full animate-bounce opacity-50"></div>
-        
+
         {/* Geometric Lines */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none">
           <defs>
@@ -78,15 +78,15 @@ const Profile = () => {
             </linearGradient>
           </defs>
           <line x1="0" y1="30%" x2="100%" y2="30%" stroke="url(#lineGrad)" strokeWidth="1" className="animate-pulse" />
-          <line x1="0" y1="70%" x2="100%" y2="70%" stroke="url(#lineGrad)" strokeWidth="1" className="animate-pulse" style={{animationDelay: '1s'}} />
+          <line x1="0" y1="70%" x2="100%" y2="70%" stroke="url(#lineGrad)" strokeWidth="1" className="animate-pulse" style={{ animationDelay: '1s' }} />
         </svg>
       </div>
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-12">
-        
+
         {/* Profile Section */}
-        <div 
+        <div
           className={`
             text-center transform transition-all duration-1200 ease-out
             ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}
@@ -97,22 +97,22 @@ const Profile = () => {
             <div className="relative">
               {/* Simple Glow Effect */}
               <div className="absolute -inset-2 bg-white/5 rounded-full blur-lg group-hover:bg-white/10 transition-all duration-500"></div>
-             {/* Profile Image */}
-<div className="flex justify-center items-center mt-10">
-  <img
-    src={profile}
-    alt="Mohd Ateek"
-    className="
+              {/* Profile Image */}
+              <div className="flex justify-center items-center mt-10">
+                <img
+                  src={profile}
+                  alt="Mohd Ateek"
+                  className="
       w-40 h-40 md:w-56 md:h-56 lg:w-64 lg:h-64
       rounded-full bg-cover bg-center object-center
       border-2 border-gray-800
       transform transition-all duration-300 ease-out
       group-hover:border-gray-600 group-hover:shadow-xl group-hover:shadow-white/5
     "
-  />
-</div>
+                />
+              </div>
 
-              
+
               {/* Status Indicator */}
               <div className="absolute bottom-2 right-2 w-5 h-5 bg-green-400 rounded-full border-3 border-black shadow-lg"></div>
             </div>
@@ -120,12 +120,12 @@ const Profile = () => {
 
           {/* Name with Letter Animation */}
           <div className="mb-8">
-            
+
             {/* Heading */}
-            
+
             <h1 id='heading' className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 tracking-tight">
-              
-             {/* Heading */}
+
+              {/* Heading */}
 
               {Array.from("Mohd Ateek").map((char, index) => (
                 <span
@@ -136,7 +136,7 @@ const Profile = () => {
                     cursor-default
                     ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}
                   `}
-                  style={{ 
+                  style={{
                     transitionDelay: `${index * 80}ms`,
                     filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.1))'
                   }}
@@ -145,7 +145,7 @@ const Profile = () => {
                 </span>
               ))}
             </h1>
-            
+
             {/* Animated Underline */}
             <div className="relative h-1 bg-gray-800 rounded-full overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent animate-slide-right"></div>
@@ -153,7 +153,7 @@ const Profile = () => {
           </div>
 
           {/* Role Badge */}
-          <div 
+          <div
             className={`
               inline-flex items-center px-6 py-3 mb-10 bg-gray-900 border border-gray-700 rounded-full
               transform transition-all duration-1000 ease-out delay-300
@@ -167,7 +167,7 @@ const Profile = () => {
           </div>
 
           {/* Description */}
-          <div 
+          <div
             className={`
               mb-12 max-w-2xl mx-auto transform transition-all duration-1000 ease-out delay-500
               ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}
@@ -183,7 +183,7 @@ const Profile = () => {
           </div>
 
           {/* Action Buttons */}
-          <div 
+          <div
             className={`
               flex flex-col sm:flex-row items-center justify-center gap-6
               transform transition-all duration-1000 ease-out delay-700
@@ -279,10 +279,10 @@ const Profile = () => {
           animation: slide-right 2s ease-in-out infinite;
         }
       `}
-      
-      
 
-      
+
+
+
       </style>
     </div>
   );
