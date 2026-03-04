@@ -3,7 +3,7 @@ import { PortfolioContext } from '../PortfolioContext';
 import { Lock, Eye, EyeOff, Shield, LogOut, Plus, Trash2, X } from 'lucide-react';
 
 // ─── Admin URL Base ────────────────────────────────────────────────────────
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://portfolio-backend-saj8.onrender.com';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
 // ─── Login Screen ─────────────────────────────────────────────────────────────
 const LoginScreen = ({ onLogin }) => {
