@@ -4,83 +4,114 @@ import { SiExpress, SiMongodb } from 'react-icons/si';
 
 export const PortfolioContext = createContext();
 
+// ──────────────────────────────────────────────────────────────────────────────
+// Backend API base URL
+// ──────────────────────────────────────────────────────────────────────────────
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+
 export const PortfolioProvider = ({ children }) => {
-  const defaultSkills = [
-    { iconName: 'FaHtml5', name: 'HTML5', percent: 100, color: 'from-orange-500 to-red-500' },
-    { iconName: 'FaCss3Alt', name: 'CSS3', percent: 100, color: 'from-blue-500 to-cyan-500' },
-    { iconName: 'FaJsSquare', name: 'JavaScript', percent: 80, color: 'from-yellow-400 to-orange-400' },
-    { iconName: 'FaBootstrap', name: 'Bootstrap', percent: 100, color: 'from-purple-600 to-indigo-600' },
-    { iconName: 'FaReact', name: 'React', percent: 70, color: 'from-cyan-400 to-blue-400' },
-    { iconName: 'FaNodeJs', name: 'Node.js', percent: 80, color: 'from-green-500 to-emerald-500' },
-    { iconName: 'SiExpress', name: 'Express', percent: 80, color: 'from-gray-300 to-gray-500' },
-    { iconName: 'SiMongodb', name: 'MongoDB', percent: 90, color: 'from-green-600 to-green-400' }
-  ];
 
-  const defaultStats = {
-    experience: '1+',
-    projects: '5+',
-    clients: 'Pending..'
-  };
-
-  const defaultProjects = [
-    {
-      w_imag: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      title: "E-Commerce Platform",
-      category: "Web Development",
-      description: "Modern e-commerce solution with React & Node.js",
-      technologies: ["React", "Node.js", "MongoDB"],
-      year: "2024",
-      link: ""
-    },
-    {
-      w_imag: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      title: "Mobile Banking App",
-      category: "Mobile App",
-      description: "Secure banking application with biometric authentication",
-      technologies: ["React Native", "Firebase", "TypeScript"],
-      year: "2024",
-      link: ""
-    }
-  ];
-
-  const [skills, setSkills] = useState(() => {
-    const saved = localStorage.getItem('portfolioSkills');
-    return saved ? JSON.parse(saved) : defaultSkills;
-  });
-
-  const [stats, setStats] = useState(() => {
-    const saved = localStorage.getItem('portfolioStats');
-    return saved ? JSON.parse(saved) : defaultStats;
-  });
-
-  const [projects, setProjects] = useState(() => {
-    const saved = localStorage.getItem('portfolioProjects');
-    return saved ? JSON.parse(saved) : defaultProjects;
-  });
-
+  // ── State ──────────────────────────────────────────────────────────────────
+  const [skills, setSkills] = useState([]);
+  const [stats, setStats] = useState({ experience: '1+', projects: '5+', clients: 'Pending..' });
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
 
+  // ── Fetch all data on mount ─────────────────────────────────────────────────
   useEffect(() => {
-    localStorage.setItem('portfolioSkills', JSON.stringify(skills));
-  }, [skills]);
+    const fetchAll = async () => {
+      try {
+        const [skillsRes, statsRes, projectsRes] = await Promise.all([
+          fetch(`${API_BASE}/skills`),
+          fetch(`${API_BASE}/stats`),
+          fetch(`${API_BASE}/projects`),
+        ]);
+        const skillsData = await skillsRes.json();
+        const statsData = await statsRes.json();
+        const projectsData = await projectsRes.json();
 
-  useEffect(() => {
-    localStorage.setItem('portfolioStats', JSON.stringify(stats));
-  }, [stats]);
+        setSkills(skillsData);
+        setStats(statsData);
+        setProjects(projectsData);
+      } catch (err) {
+        console.error('❌ Failed to fetch portfolio data:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAll();
+  }, []);
 
-  useEffect(() => {
-    localStorage.setItem('portfolioProjects', JSON.stringify(projects));
-  }, [projects]);
+  // ── Skills CRUD ────────────────────────────────────────────────────────────
+  const addSkill = async (skill) => {
+    try {
+      const res = await fetch(`${API_BASE}/skills`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(skill),
+      });
+      const saved = await res.json();
+      setSkills(prev => [...prev, saved]);
+    } catch (err) {
+      console.error('❌ addSkill error:', err);
+    }
+  };
 
-  const addSkill = (skill) => setSkills([...skills, skill]);
-  const addProject = (project) => setProjects([project, ...projects]);
-  const updateStats = (newStats) => setStats({ ...stats, ...newStats });
+  const removeSkill = async (id) => {
+    try {
+      await fetch(`${API_BASE}/skills/${id}`, { method: 'DELETE' });
+      setSkills(prev => prev.filter(s => s._id !== id));
+    } catch (err) {
+      console.error('❌ removeSkill error:', err);
+    }
+  };
+
+  // ── Stats CRUD ─────────────────────────────────────────────────────────────
+  const updateStats = async (newStats) => {
+    try {
+      const res = await fetch(`${API_BASE}/stats`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newStats),
+      });
+      const saved = await res.json();
+      setStats(saved);
+    } catch (err) {
+      console.error('❌ updateStats error:', err);
+    }
+  };
+
+  // ── Projects CRUD ──────────────────────────────────────────────────────────
+  const addProject = async (project) => {
+    try {
+      const res = await fetch(`${API_BASE}/projects`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(project),
+      });
+      const saved = await res.json();
+      setProjects(prev => [saved, ...prev]);
+    } catch (err) {
+      console.error('❌ addProject error:', err);
+    }
+  };
+
+  const removeProject = async (id) => {
+    try {
+      await fetch(`${API_BASE}/projects/${id}`, { method: 'DELETE' });
+      setProjects(prev => prev.filter(p => p._id !== id));
+    } catch (err) {
+      console.error('❌ removeProject error:', err);
+    }
+  };
 
   return (
     <PortfolioContext.Provider value={{
-      skills, addSkill, setSkills,
+      skills, addSkill, removeSkill, setSkills,
       stats, updateStats,
-      projects, addProject, setProjects,
+      projects, addProject, removeProject, setProjects,
+      loading,
       isAdminOpen, setIsAdminOpen
     }}>
       {children}

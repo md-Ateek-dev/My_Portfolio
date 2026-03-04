@@ -51,7 +51,7 @@ const Services = () => {
   const [showAll, setShowAll] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
-  
+
   const servicesToShow = showAll ? Services_data : Services_data.slice(0, 3);
 
   useEffect(() => {
@@ -59,15 +59,15 @@ const Services = () => {
   }, []);
 
   return (
-    <div 
+    <div
       id='services'
       className='relative bg-black min-h-screen w-full overflow-hidden'
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-cyan-600/20 to-purple-600/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-pink-600/10 to-orange-600/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '4s'}}></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-cyan-600/20 to-purple-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-pink-600/10 to-orange-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
       </div>
 
       {/* Grid Pattern Overlay */}
@@ -87,31 +87,30 @@ const Services = () => {
             </h1>
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full"></div>
           </div>
-          <p data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="text-gray-400 text-lg mt-8 max-w-2xl mx-auto leading-relaxed">
+          <p data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="text-gray-400 text-lg mt-8 max-w-2xl mx-auto leading-relaxed">
             Transforming ideas into digital excellence with cutting-edge solutions and innovative approaches
           </p>
         </div>
 
         {/* Services Grid */}
-        <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl'>
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl'>
           {servicesToShow.map((service, index) => {
             const IconComponent = service.icon;
             return (
               <div
                 key={index}
-                className={`group relative transform transition-all duration-700 ${
-                  isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
-                }`}
+                className={`group relative transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
+                  }`}
                 style={{ transitionDelay: `${index * 200}ms` }}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 {/* Glowing Border Effect */}
                 <div className={`absolute -inset-0.5 bg-gradient-to-r ${service.color} rounded-2xl blur opacity-0 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 animate-tilt`}></div>
-                
+
                 {/* Main Card */}
                 <div className='relative bg-gray-900/90 backdrop-blur-xl border border-gray-800 rounded-2xl p-8 h-full cursor-pointer transform transition-all duration-500 group-hover:scale-[1.02] group-hover:border-transparent overflow-hidden'>
-                  
+
                   {/* Background Pattern */}
                   <div className="absolute top-0 right-0 w-32 h-32 opacity-5">
                     <div className="w-full h-full bg-gradient-to-br from-white to-transparent transform rotate-12 rounded-lg"></div>
@@ -142,9 +141,8 @@ const Services = () => {
                   {/* Read More Button */}
                   <div className='flex items-center gap-3 text-gray-400 group-hover:text-white transition-all duration-300 mt-auto'>
                     <span className="font-medium">Explore more</span>
-                    <FaLongArrowAltRight className={`text-lg transform transition-all duration-300 ${
-                      hoveredIndex === index ? 'translate-x-2' : ''
-                    }`} />
+                    <FaLongArrowAltRight className={`text-lg transform transition-all duration-300 ${hoveredIndex === index ? 'translate-x-2' : ''
+                      }`} />
                   </div>
 
                   {/* Hover Effect Overlay */}
@@ -157,16 +155,15 @@ const Services = () => {
 
         {/* Show More / Less Button */}
         {Services_data.length > 3 && (
-          <div className={`transform transition-all duration-1000 ${
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-          }`} style={{ transitionDelay: '800ms' }}>
+          <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+            }`} style={{ transitionDelay: '800ms' }}>
             <button
               onClick={() => setShowAll(!showAll)}
               className='group relative px-8 py-4 bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 rounded-full text-white font-semibold overflow-hidden transform transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50'
             >
               {/* Button Background Gradient */}
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-cyan-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
+
               {/* Button Text */}
               <span className="relative z-10 flex items-center gap-3">
                 {showAll ? 'Show Less' : 'Show More'}

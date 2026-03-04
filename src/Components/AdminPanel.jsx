@@ -2,9 +2,8 @@ import React, { useContext, useState } from 'react';
 import { PortfolioContext } from '../PortfolioContext';
 import { Lock, Eye, EyeOff, Shield, LogOut, Plus, Trash2, X } from 'lucide-react';
 
-// ─── Admin Credentials ────────────────────────────────────────────────────────
-const ADMIN_USERNAME = 'Mohd_Ateek09';
-const ADMIN_PASSWORD = 'Ateek@#&258013710415';
+// ─── Admin URL Base ────────────────────────────────────────────────────────
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
 // ─── Login Screen ─────────────────────────────────────────────────────────────
 const LoginScreen = ({ onLogin }) => {
@@ -14,18 +13,30 @@ const LoginScreen = ({ onLogin }) => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError('');
-        setTimeout(() => {
-            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+
+        try {
+            const res = await fetch(`${API_BASE}/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
                 onLogin();
             } else {
-                setError('Invalid username or password!');
+                setError(data.error || 'Invalid username or password!');
             }
+        } catch (err) {
+            setError('Failed to connect to server');
+        } finally {
             setLoading(false);
-        }, 800);
+        }
     };
 
     return (
@@ -132,9 +143,10 @@ const LoginScreen = ({ onLogin }) => {
 // ─── Main Admin Panel ─────────────────────────────────────────────────────────
 const AdminPanel = () => {
     const {
-        skills, addSkill, setSkills,
+        skills, addSkill, removeSkill,
         stats, updateStats,
-        projects, addProject, setProjects,
+        projects, addProject, removeProject,
+        loading,
         setIsAdminOpen
     } = useContext(PortfolioContext);
 
@@ -168,34 +180,30 @@ const AdminPanel = () => {
 
     // ── Skills ──
     const handleSkillChange = (e) => setNewSkill({ ...newSkill, [e.target.name]: e.target.value });
-    const saveSkill = () => {
+    const saveSkill = async () => {
         if (!newSkill.name) return;
-        addSkill({ ...newSkill, percent: parseInt(newSkill.percent, 10) });
+        await addSkill({ ...newSkill, percent: parseInt(newSkill.percent, 10) });
         setNewSkill({ name: '', iconName: 'FaReact', percent: 80, color: 'from-blue-400 to-cyan-400' });
         showSuccess('✅ Skill added successfully!');
     };
-    const removeSkill = (index) => {
-        const updated = [...skills];
-        updated.splice(index, 1);
-        setSkills(updated);
+    const handleRemoveSkill = async (id) => {
+        await removeSkill(id);
         showSuccess('🗑️ Skill removed!');
     };
 
     // ── Projects ──
     const handleProjectChange = (e) => setNewProject({ ...newProject, [e.target.name]: e.target.value });
-    const saveProject = () => {
+    const saveProject = async () => {
         if (!newProject.title) return;
-        addProject({
+        await addProject({
             ...newProject,
             technologies: newProject.technologies.split(',').map(t => t.trim())
         });
         setNewProject({ w_imag: '', title: '', category: '', description: '', technologies: '', year: '', link: '' });
         showSuccess('✅ Project added successfully!');
     };
-    const removeProject = (index) => {
-        const updated = [...projects];
-        updated.splice(index, 1);
-        setProjects(updated);
+    const handleRemoveProject = async (id) => {
+        await removeProject(id);
         showSuccess('🗑️ Project removed!');
     };
 
@@ -355,27 +363,31 @@ const AdminPanel = () => {
 
                         <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8">
                             <h3 className="text-xl font-bold text-white mb-5">Existing Skills ({skills.length})</h3>
-                            <div className="flex flex-wrap gap-3">
-                                {skills.map((skill, idx) => (
-                                    <div
-                                        key={idx}
-                                        className="group flex items-center gap-3 bg-gray-800 border border-gray-700 hover:border-gray-600 px-4 py-2.5 rounded-xl transition-all duration-200"
-                                    >
-                                        <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${skill.color}`} />
-                                        <span className="text-white text-sm font-medium">{skill.name}</span>
-                                        <span className="text-gray-500 text-xs">{skill.percent}%</span>
-                                        <button
-                                            onClick={() => removeSkill(idx)}
-                                            className="text-gray-600 hover:text-red-400 transition-colors duration-200 ml-1"
+                            {loading ? (
+                                <p className="text-gray-500 text-sm">Loading...</p>
+                            ) : (
+                                <div className="flex flex-wrap gap-3">
+                                    {skills.map((skill) => (
+                                        <div
+                                            key={skill._id}
+                                            className="group flex items-center gap-3 bg-gray-800 border border-gray-700 hover:border-gray-600 px-4 py-2.5 rounded-xl transition-all duration-200"
                                         >
-                                            <Trash2 className="w-3.5 h-3.5" />
-                                        </button>
-                                    </div>
-                                ))}
-                                {skills.length === 0 && (
-                                    <p className="text-gray-600 text-sm">No skills added yet.</p>
-                                )}
-                            </div>
+                                            <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${skill.color}`} />
+                                            <span className="text-white text-sm font-medium">{skill.name}</span>
+                                            <span className="text-gray-500 text-xs">{skill.percent}%</span>
+                                            <button
+                                                onClick={() => handleRemoveSkill(skill._id)}
+                                                className="text-gray-600 hover:text-red-400 transition-colors duration-200 ml-1"
+                                            >
+                                                <Trash2 className="w-3.5 h-3.5" />
+                                            </button>
+                                        </div>
+                                    ))}
+                                    {skills.length === 0 && (
+                                        <p className="text-gray-600 text-sm">No skills added yet.</p>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     </div>
                 )}
@@ -433,38 +445,42 @@ const AdminPanel = () => {
 
                         <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8">
                             <h3 className="text-xl font-bold text-white mb-5">Existing Projects ({projects.length})</h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                {projects.map((proj, idx) => (
-                                    <div
-                                        key={idx}
-                                        className="group bg-gray-800/60 border border-gray-700 hover:border-gray-600 p-5 rounded-2xl flex justify-between items-start gap-4 transition-all duration-200"
-                                    >
-                                        <div className="flex-1 min-w-0">
-                                            <h4 className="font-bold text-white text-base mb-1 truncate">{proj.title}</h4>
-                                            <p className="text-gray-500 text-xs mb-2 truncate">{proj.description}</p>
-                                            {proj.link && (
-                                                <a
-                                                    href={proj.link}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-blue-400 hover:text-blue-300 text-xs truncate block underline underline-offset-2 transition-colors"
-                                                >
-                                                    {proj.link}
-                                                </a>
-                                            )}
-                                        </div>
-                                        <button
-                                            onClick={() => removeProject(idx)}
-                                            className="flex-shrink-0 p-2 text-gray-600 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-200"
+                            {loading ? (
+                                <p className="text-gray-500 text-sm">Loading...</p>
+                            ) : (
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    {projects.map((proj) => (
+                                        <div
+                                            key={proj._id}
+                                            className="group bg-gray-800/60 border border-gray-700 hover:border-gray-600 p-5 rounded-2xl flex justify-between items-start gap-4 transition-all duration-200"
                                         >
-                                            <Trash2 className="w-4 h-4" />
-                                        </button>
-                                    </div>
-                                ))}
-                                {projects.length === 0 && (
-                                    <p className="text-gray-600 text-sm col-span-2">No projects added yet.</p>
-                                )}
-                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <h4 className="font-bold text-white text-base mb-1 truncate">{proj.title}</h4>
+                                                <p className="text-gray-500 text-xs mb-2 truncate">{proj.description}</p>
+                                                {proj.link && (
+                                                    <a
+                                                        href={proj.link}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-blue-400 hover:text-blue-300 text-xs truncate block underline underline-offset-2 transition-colors"
+                                                    >
+                                                        {proj.link}
+                                                    </a>
+                                                )}
+                                            </div>
+                                            <button
+                                                onClick={() => handleRemoveProject(proj._id)}
+                                                className="flex-shrink-0 p-2 text-gray-600 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-200"
+                                            >
+                                                <Trash2 className="w-4 h-4" />
+                                            </button>
+                                        </div>
+                                    ))}
+                                    {projects.length === 0 && (
+                                        <p className="text-gray-600 text-sm col-span-2">No projects added yet.</p>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     </div>
                 )}
