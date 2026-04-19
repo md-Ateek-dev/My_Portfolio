@@ -167,6 +167,9 @@ const AdminPanel = () => {
         w_imag: '', title: '', category: '', description: '', technologies: '', year: '', link: ''
     });
 
+    const [imageFile, setImageFile] = useState(null);
+    const [isUploading, setIsUploading] = useState(false);
+
     const [successMsg, setSuccessMsg] = useState('');
 
     const showSuccess = (msg) => {
@@ -193,15 +196,78 @@ const AdminPanel = () => {
 
     // ── Projects ──
     const handleProjectChange = (e) => setNewProject({ ...newProject, [e.target.name]: e.target.value });
-    const saveProject = async () => {
-        if (!newProject.title) return;
-        await addProject({
-            ...newProject,
-            technologies: newProject.technologies.split(',').map(t => t.trim())
-        });
-        setNewProject({ w_imag: '', title: '', category: '', description: '', technologies: '', year: '', link: '' });
-        showSuccess('✅ Project added successfully!');
+
+    const handleImageChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setImageFile(e.target.files[0]);
+        }
     };
+
+   const saveProject = async () => {
+  if (!newProject.title) return;
+
+  setIsUploading(true);
+
+  try {
+    let imageUrl = newProject.w_imag;
+
+    // ✅ Step 1: Upload to Cloudinary
+    if (imageFile) {
+      const formData = new FormData();
+      formData.append("file", imageFile);
+      formData.append("upload_preset", "portfolio_upload"); // 🔥 change if needed
+
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/djv97kkwe/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await res.json();
+
+      if (data.secure_url) {
+        imageUrl = data.secure_url;
+        console.log("✅ Cloudinary URL:", imageUrl);
+      } else {
+        console.error("❌ Upload failed:", data);
+        showSuccess("❌ Image upload failed!");
+        setIsUploading(false);
+        return;
+      }
+    }
+
+    // ✅ Step 2: Save in DB
+    await addProject({
+      ...newProject,
+      w_imag: imageUrl,
+      technologies: newProject.technologies
+        .split(",")
+        .map((t) => t.trim()),
+    });
+
+    // ✅ Reset form
+    setNewProject({
+      w_imag: "",
+      title: "",
+      category: "",
+      description: "",
+      technologies: "",
+      year: "",
+      link: "",
+    });
+
+    setImageFile(null);
+    showSuccess("✅ Project added successfully!");
+
+  } catch (error) {
+    console.error("❌ Error:", error);
+    showSuccess("❌ Something went wrong!");
+  } finally {
+    setIsUploading(false);
+  }
+};
     const handleRemoveProject = async (id) => {
         await removeProject(id);
         showSuccess('🗑️ Project removed!');
@@ -401,7 +467,7 @@ const AdminPanel = () => {
                                 {[
                                     { label: 'Project Title', name: 'title', placeholder: 'My Awesome App', type: 'text', span: false },
                                     { label: 'Category', name: 'category', placeholder: 'Web Development', type: 'text', span: false },
-                                    { label: 'Image URL', name: 'w_imag', placeholder: 'https://...', type: 'text', span: false },
+                                    { label: 'Project Image', name: 'w_imag', placeholder: '', type: 'file', span: false },
                                     { label: 'Year', name: 'year', placeholder: '2025', type: 'text', span: false },
                                     { label: '🔗 Project Link (opens on "View Project")', name: 'link', placeholder: 'https://yourproject.com', type: 'url', span: true },
                                     { label: 'Technologies (comma-separated)', name: 'technologies', placeholder: 'React, Tailwind, Node.js', type: 'text', span: true },
@@ -410,14 +476,23 @@ const AdminPanel = () => {
                                         <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
                                             {field.label}
                                         </label>
-                                        <input
-                                            type={field.type}
-                                            name={field.name}
-                                            placeholder={field.placeholder}
-                                            value={newProject[field.name]}
-                                            onChange={handleProjectChange}
-                                            className="w-full bg-gray-800 border border-gray-700 hover:border-gray-600 rounded-xl p-3.5 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300"
-                                        />
+                                        {field.type === 'file' ? (
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={handleImageChange}
+                                                className="w-full bg-gray-800 border border-gray-700 hover:border-gray-600 rounded-xl p-2.5 text-white file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-500/20 file:text-blue-400 hover:file:bg-blue-500/30 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300"
+                                            />
+                                        ) : (
+                                            <input
+                                                type={field.type}
+                                                name={field.name}
+                                                placeholder={field.placeholder}
+                                                value={newProject[field.name]}
+                                                onChange={handleProjectChange}
+                                                className="w-full bg-gray-800 border border-gray-700 hover:border-gray-600 rounded-xl p-3.5 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300"
+                                            />
+                                        )}
                                     </div>
                                 ))}
                                 <div className="md:col-span-2">
@@ -436,10 +511,20 @@ const AdminPanel = () => {
                             </div>
                             <button
                                 onClick={saveProject}
-                                className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"
+                                disabled={isUploading}
+                                className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-300 flex items-center gap-2"
                             >
-                                <Plus className="w-5 h-5" />
-                                Add Project
+                                {isUploading ? (
+                                    <>
+                                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                        Uploading...
+                                    </>
+                                ) : (
+                                    <>
+                                        <Plus className="w-5 h-5" />
+                                        Add Project
+                                    </>
+                                )}
                             </button>
                         </div>
 

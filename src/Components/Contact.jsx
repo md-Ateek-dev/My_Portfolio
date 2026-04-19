@@ -120,7 +120,7 @@ const Contact = () => {
                     <div className="min-w-0 flex-1">
                       <p className="text-gray-400 text-xs sm:text-sm">Email</p>
                       <a href="mailto:mohdateek@gmail.com" className="text-white hover:text-blue-400 transition-colors text-sm sm:text-lg font-medium break-all">
-                        mohdateek@gmail.com
+                        mohdateek.dev@gmail.com
                       </a>
                     </div>
                   </div>

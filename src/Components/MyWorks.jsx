@@ -118,35 +118,41 @@ const MyWorks = () => {
                   />
 
                   {/* Image Overlay */}
-                  <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500'>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <div className="flex gap-2 mb-2">
-                        {work.technologies.slice(0, 3).map((tech, i) => (
-                          <span key={i} className="px-2 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs text-white">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-100'>
+  <div className="absolute bottom-4 left-4 right-4">
+    <div className="flex flex-wrap gap-2">
+      {work.technologies.slice(0, 3).map((tech, i) => (
+        <span
+          key={i}
+          className="px-2 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs text-white transition-all duration-300 group-hover:bg-blue-500"
+        >
+          {tech}
+        </span>
+      ))}
+    </div>
+  </div>
+</div>
 
                   {/* Hover Actions */}
-                  <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">
-                    <button
-                      onClick={(e) => { e.stopPropagation(); handleViewProject(work.link); }}
-                      title={work.link ? 'View Project' : 'No link available'}
-                      className={`p-2 backdrop-blur-sm rounded-full text-white transition-colors duration-200 ${work.link ? 'bg-white/20 hover:bg-white/40 cursor-pointer' : 'bg-white/10 cursor-not-allowed opacity-50'}`}
-                    >
-                      <FaEye className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={(e) => { e.stopPropagation(); handleViewProject(work.link); }}
-                      title={work.link ? 'Open in new tab' : 'No link available'}
-                      className={`p-2 backdrop-blur-sm rounded-full text-white transition-colors duration-200 ${work.link ? 'bg-white/20 hover:bg-white/40 cursor-pointer' : 'bg-white/10 cursor-not-allowed opacity-50'}`}
-                    >
-                      <FaExternalLinkAlt className="w-4 h-4" />
-                    </button>
-                  </div>
+                 <div className="absolute z-10 top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">
+  
+  <button
+    onClick={(e) => { e.stopPropagation(); handleViewProject(work.w_imag); }}
+    title={work.w_imag ? 'View Image' : 'No image'}
+    className={`p-2 backdrop-blur-sm rounded-full text-white transition ${work.w_imag ? 'bg-black/60 hover:bg-black/80 cursor-pointer' : 'bg-red-500 cursor-not-allowed opacity-50'}`}
+  >
+    <FaEye className="w-4 h-4" />
+  </button>
+
+  <button
+    onClick={(e) => { e.stopPropagation(); handleViewProject(work.link); }}
+    title={work.link ? 'Open project' : 'No link'}
+    className={`p-2 backdrop-blur-sm rounded-full text-white transition ${work.link ? 'bg-black/60 hover:bg-black/80 cursor-pointer' : 'bg-gray-500 cursor-not-allowed opacity-50'}`}
+  >
+    <FaExternalLinkAlt className="w-4 h-4" />
+  </button>
+
+</div>
 
                   {/* Category Badge */}
                   <div className="absolute top-4 left-4">
