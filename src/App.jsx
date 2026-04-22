@@ -20,14 +20,27 @@ const App = () => {
   }
 
   return (
-    <div>
-      <Navbaar />
-      <Profile />
-      <AboutUs />
-      <Services />
-      <MyWorks />
-      <Contact />
-      <Footer />
+    <div className="relative min-h-screen bg-[#050505] text-white">
+      {/* ── Global Grid Background ───────────────────────────── */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.025]"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
+          backgroundSize: '72px 72px',
+        }}
+      />
+      
+      {/* ── Main Content ─────────────────────────────────────── */}
+      <div className="relative z-10">
+        <Navbaar />
+        <Profile />
+        <AboutUs />
+        <Services />
+        <MyWorks />
+        <Contact />
+        <Footer />
+      </div>
     </div>
   )
 }

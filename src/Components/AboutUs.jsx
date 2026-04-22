@@ -1,179 +1,202 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { PortfolioContext } from '../PortfolioContext';
 import * as FaIcons from 'react-icons/fa';
 import * as SiIcons from 'react-icons/si';
 import profile from '../assets/ProfileImage.png';
+import { motion } from 'framer-motion';
+
+const renderIcon = (iconName) => {
+  if (iconName?.startsWith('Fa') && FaIcons[iconName]) { const I = FaIcons[iconName]; return <I />; }
+  if (iconName?.startsWith('Si') && SiIcons[iconName]) { const I = SiIcons[iconName]; return <I />; }
+  return <FaIcons.FaCode />;
+};
+
+const StatCard = ({ number, label, delay }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay: delay }}
+      className="bg-white/5 backdrop-blur-lg border border-white/10 hover:bg-white/10 transition-colors rounded-2xl p-8 text-center flex-1 min-w-[160px] shadow-lg"
+    >
+      <p className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent mb-2">{number}</p>
+      <p className="text-gray-500 text-xs tracking-widest uppercase font-medium">{label}</p>
+    </motion.div>
+  );
+};
 
 const AboutUs = () => {
   const { skills, stats } = useContext(PortfolioContext);
 
-  const [isVisible, setIsVisible] = useState(false);
-  const [skillsAnimated, setSkillsAnimated] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-    const timer = setTimeout(() => setSkillsAnimated(true), 800);
-    return () => clearTimeout(timer);
-  }, []);
-
   const statsArray = [
-    { number: stats.experience, label: 'YEAR OF EXPERIENCE', delay: '0ms' },
-    { number: stats.projects, label: 'PROJECTS COMPLETED', delay: '200ms' },
-    { number: stats.clients, label: 'HAPPY CLIENTS', delay: '400ms' }
+    { number: stats?.experience || '1+', label: 'Years Experience', delay: 0 },
+    { number: stats?.projects || '5+', label: 'Projects Done', delay: 0.15 },
+    { number: stats?.clients || '0', label: 'Happy Clients', delay: 0.3 },
   ];
 
-  const renderIcon = (iconName) => {
-    if (iconName.startsWith('Fa') && FaIcons[iconName]) {
-      const Icon = FaIcons[iconName];
-      return <Icon />;
-    }
-    if (iconName.startsWith('Si') && SiIcons[iconName]) {
-      const Icon = SiIcons[iconName];
-      return <Icon />;
-    }
-    return <FaIcons.FaCode />;
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
 
   return (
-    <div id='aboutus' className='relative min-h-screen bg-black'>
-      {/* Animated Background Elements */}
-      <div className='absolute inset-0'>
-        <div className='absolute top-20 left-20 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl animate-pulse'></div>
-        <div className='absolute bottom-20 right-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse' style={{ animationDelay: '1s' }}></div>
-        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl animate-pulse' style={{ animationDelay: '2s' }}></div>
+    <section id="aboutus" className="relative min-h-screen bg-transparent overflow-hidden py-24 px-6">
+      {/* ── Background glows ────────────────────────────── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full opacity-10 blur-3xl"
+          style={{ background: 'radial-gradient(circle, #a855f7, transparent 70%)' }} />
+        <div className="absolute -bottom-32 -right-32 w-[600px] h-[600px] rounded-full opacity-10 blur-3xl"
+          style={{ background: 'radial-gradient(circle, #06b6d4, transparent 70%)' }} />
       </div>
 
-      {/* Floating Particles */}
-      {[...Array(20)].map((_, i) => (
-        <div
-          key={i}
-          className='absolute w-1 h-1 bg-white/20 rounded-full animate-pulse'
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 3}s`,
-            animationDuration: `${2 + Math.random() * 3}s`
-          }}
-        ></div>
-      ))}
-
-      <div className='relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-16'>
-        {/* Main Heading */}
-        <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h1 id='heading' className='text-5xl md:text-7xl font-bold text-center mb-4 text-white animate-pulse'>
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* ── Section heading ──────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-20"
+        >
+          <span className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-indigo-500/20 text-indigo-400 text-xs font-semibold tracking-widest uppercase mb-5">
             About Me
-          </h1>
-          <div className='w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto rounded-full'></div>
-        </div>
+          </span>
+          <h2 id="heading" className="text-5xl md:text-6xl lg:text-7xl text-white mb-4">
+            Who I <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">Am</span>
+          </h2>
+          <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mx-auto" />
+        </motion.div>
 
-        {/* Main Content */}
-        <div className='flex flex-col lg:flex-row items-center justify-center gap-16 w-full max-w-7xl mt-16'>
-
-          {/* Profile Section */}
-          <div className={`w-full lg:w-1/3 flex flex-col items-center transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
-            <div className='relative group'>
-              {/* Glowing Border Effect */}
-              <div className='absolute rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse'></div>
-
-              {/* Profile Image Placeholder */}
-              <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className='relative w-80 h-80 bg-gradient-to-br from-slate-800 to-slate-700 rounded-2xl flex items-center justify-center border border-slate-600 group-hover:scale-105 transition-transform duration-500'>
-                <div className='text-slate-400 text-6xl'> <img className='bg-cover bg-center h-80 w-80 rounded-2xl' src={profile} alt="ateek" /></div>
-                <div className='absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-purple-500/10 rounded-2xl'></div>
+        {/* ── Two-column layout ────────────────────────── */}
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start mb-20">
+          {/* Left – profile image */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="w-full lg:w-[38%] flex-shrink-0"
+          >
+            <div className="relative group mx-auto max-w-[340px]">
+              {/* Glowing border */}
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-white via-purple-200 to-cyan-500 opacity-30 group-hover:opacity-60 blur transition-opacity duration-500" />
+              <div className="relative overflow-hidden border-2 border-white rounded-3xl">
+                <img
+                  src={profile}
+                  alt="Mohd Ateek"
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700"
+                />
+                {/* Overlay tint */}
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/10 via-transparent to-purple-600/10" />
               </div>
+
+              {/* Floating tag */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="absolute -bottom-4 -right-4 bg-gray-900/80 backdrop-blur-md border border-indigo-500/20 rounded-2xl px-5 py-3 shadow-xl"
+              >
+                <p className="text-white font-semibold text-sm">MERN Stack</p>
+                <p className="text-gray-400 text-xs">Full Stack Dev</p>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Content Section */}
-          <div className={`w-full lg:w-2/3 space-y-12 transform transition-all duration-1000 delay-500 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
-
-            {/* Introduction */}
-            <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50"
-
-              className='backdrop-blur-sm bg-white/5 rounded-2xl p-8 border border-white/10 shadow-2xl hover:bg-white/10 transition-all duration-500'>
-              <p className='text-xl md:text-2xl leading-relaxed text-gray-200'>
-                <span className='text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent'>
-                  "I'm Mohd Ateek"
-                </span>
-                <br />
-                <span className='text-purple-300 font-semibold'>Full Stack Developer</span> who loves building clean, responsive websites and solving real-world problems with impactful code.
-                <br />
-                <span className='italic text-cyan-300'>"Clean Code, Deep Impact."</span>
+          {/* Right – bio + skills */}
+          <div className="w-full lg:flex-1 space-y-8">
+            {/* Bio card */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="bg-white/5 backdrop-blur-md hover:bg-white/10 transition-colors rounded-2xl p-8 border border-white/10"
+            >
+              <p className="text-2xl md:text-3xl font-bold text-white mb-1">
+                <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">"I'm Mohd Ateek"</span>
               </p>
-            </div>
+              <p className="text-purple-300 font-medium mb-4">Full Stack Developer</p>
+              <p className="text-gray-400 text-lg leading-relaxed">
+                I love building clean, responsive web applications and solving real-world problems
+                with impactful code. My motto:{' '}
+                <span className="italic text-cyan-300 font-medium">"Clean Code, Deep Impact."</span>
+              </p>
+            </motion.div>
 
-            {/* Skills Section */}
-            <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50"
-              className='backdrop-blur-sm bg-white/5 rounded-2xl p-8 border border-white/10 shadow-2xl'>
-              <h3 className='text-2xl font-bold text-white mb-8 flex items-center gap-3'>
-                <span className='w-2 h-8 bg-gradient-to-b from-cyan-400 to-purple-500 rounded-full'></span>
+            {/* Skills */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={containerVariants}
+              className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10"
+            >
+              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                <span className="w-1 h-7 bg-gradient-to-b from-indigo-400 to-purple-500 rounded-full" />
                 Technical Skills
               </h3>
 
-              <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-                {skills.map((skill, index) => (
-                  <div key={index} className='group hover:scale-105 transition-transform duration-300'>
-                    <div className='flex items-center justify-between mb-3'>
-                      <div className='flex items-center gap-3 text-white'>
-                        <span className={`text-2xl group-hover:scale-110 transition-transform duration-300 ${skill.color ? 'text-transparent bg-clip-text bg-gradient-to-r ' + skill.color : ''}`}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {skills && skills.map((skill, i) => (
+                  <motion.div
+                    key={i}
+                    variants={itemVariants}
+                    className="group bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-white/20 transition-all duration-300 rounded-xl p-5"
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3 text-white">
+                        <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-2xl text-indigo-400 group-hover:scale-110 group-hover:text-purple-400 transition-all duration-300 shadow-inner">
                           {renderIcon(skill.iconName)}
-                        </span>
-                        <span className='font-medium'>{skill.name}</span>
-                      </div>
-                      <span className='text-cyan-300 font-bold'>{skill.percent}%</span>
-                    </div>
-
-                    <div className='w-full bg-slate-700 rounded-full h-3 overflow-hidden'>
-                      <div className='h-full bg-slate-600 rounded-full relative overflow-hidden'>
-                        <div
-                          className={`h-full bg-gradient-to-r ${skill.color} rounded-full transition-all duration-1000 ease-out relative`}
-                          style={{
-                            width: skillsAnimated ? `${skill.percent}%` : '0%',
-                            transitionDelay: `${index * 100}ms`
-                          }}
-                        >
-                          <div className='absolute inset-0 bg-white/20 animate-pulse'></div>
                         </div>
+                        <span className="font-semibold tracking-wide">{skill.name}</span>
+                      </div>
+                      <div className="flex flex-col items-end">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 font-bold text-lg">
+                          {skill.percent}%
+                        </span>
                       </div>
                     </div>
-                  </div>
+                    {/* Progress bar track */}
+                    <div className="h-2.5 bg-black/40 rounded-full overflow-hidden relative shadow-inner">
+                      {/* Animated Progress */}
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${skill.percent}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
+                        className={`h-full rounded-full relative bg-gradient-to-r ${skill.color ?? 'from-indigo-500 via-purple-500 to-cyan-500'}`}
+                      >
+                        {/* Shimmer effect inside the bar using framer-motion */}
+                        <motion.div
+                          animate={{ x: ['-100%', '200%'] }}
+                          transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12"
+                        />
+                      </motion.div>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
-        {/* Stats Section */}
-        <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className='flex flex-col md:flex-row items-center justify-center gap-12 mt-20 w-full max-w-5xl'>
-          {statsArray.map((stat, index) => (
-            <div
-              key={index}
-              className={`text-center group cursor-pointer transform transition-all duration-700 hover:scale-110 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-              style={{ transitionDelay: stat.delay }}
-            >
-              <div className='backdrop-blur-sm bg-white/5 rounded-2xl p-8 border border-white/10 shadow-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-500'>
-                <h2 className='text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300'>
-                  {stat.number}
-                </h2>
-                <p className='text-gray-300 text-sm md:text-base font-medium tracking-wider'>
-                  {stat.label}
-                </p>
-                <div className='w-16 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto mt-4 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500'></div>
-              </div>
-            </div>
+        {/* ── Stats row ────────────────────────────────── */}
+        <div className="flex flex-col sm:flex-row gap-5">
+          {statsArray.map((s, i) => (
+            <StatCard key={i} number={s.number} label={s.label} delay={s.delay} />
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-      `}</style>
-    </div>
+    </section>
   );
 };
 

@@ -1,22 +1,24 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Arizonia&display=swap');
 @import "tailwindcss";
 
-body{
+body {
   width: 100%;
   overflow-x: hidden;
-margin: 0;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 #heading {
   font-family: "Arizonia", cursive;
   font-weight: 400;
   font-style: normal;
 }
 
-#favicon{
-  border-radius:"50%";
+#favicon {
+  border-radius: "50%";
 }
-.icon{
+
+.icon {
   border-radius: 50%;
 }

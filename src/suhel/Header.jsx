@@ -12,9 +12,9 @@ const ModernNavbar = () => {
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
-    
+
     setTimeout(() => setIsLoaded(true), 200);
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -206,12 +206,11 @@ const ModernNavbar = () => {
         }
       `}</style>
 
-      <div className={`w-full fixed top-0 z-50 transition-all duration-700 ease-out ${
-        scrolled 
-          ? 'glass-effect shadow-2xl' 
-          : 'bg-transparent backdrop-blur-sm'
-      } ${isLoaded ? 'navbar-enter' : ''}`}>
-        
+      <div className={`w-full fixed top-0 z-50 transition-all duration-700 ease-out ${scrolled
+        ? 'glass-effect shadow-2xl'
+        : 'bg-transparent backdrop-blur-sm'
+        } ${isLoaded ? 'navbar-enter' : ''}`}>
+
         {/* Floating particles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {[...Array(5)].map((_, i) => (
@@ -230,11 +229,11 @@ const ModernNavbar = () => {
 
         <div className="max-w-7xl mx-auto relative">
           <div className='flex items-center justify-between px-6 lg:px-8 h-20'>
-            
+
             {/* Modern Logo */}
             <div className="relative group">
               <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 rounded-full opacity-0 group-hover:opacity-100 blur-xl transition-all duration-700"></div>
-              
+
               <div className="relative h-12 w-12 logo-animation group-hover:scale-110">
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl rotate-45 group-hover:rotate-90 transition-transform duration-500"></div>
                 <div className="absolute inset-1 bg-black rounded-lg rotate-45 group-hover:rotate-90 transition-transform duration-500 flex items-center justify-center">
@@ -246,25 +245,24 @@ const ModernNavbar = () => {
             {/* Desktop Navigation */}
             <nav className='hidden lg:flex items-center space-x-2'>
               {navItems.map((item, index) => (
-                <div 
-                  key={item.id} 
+                <div
+                  key={item.id}
                   className={`nav-item-enter magnetic-hover ${isLoaded ? '' : 'opacity-0'}`}
                   style={{ animationDelay: `${0.3 + index * 0.1}s` }}
                 >
-                  <AnchorLink 
+                  <AnchorLink
                     href={item.href}
                     onClick={() => handleMenuClick(item.id)}
                   >
-                    <div className={`relative px-6 py-3 rounded-full text-sm font-medium transition-all duration-500 ripple-effect overflow-hidden ${
-                      menu === item.id 
-                        ? 'text-white bg-gradient-to-r from-indigo-600/20 to-purple-600/20 border border-indigo-500/30' 
-                        : 'text-gray-300 hover:text-white hover:bg-white/5'
-                    }`}>
-                      
+                    <div className={`relative px-6 py-3 rounded-full text-sm font-medium transition-all duration-500 ripple-effect overflow-hidden ${menu === item.id
+                      ? 'text-white bg-gradient-to-r from-indigo-600/20 to-purple-600/20 border border-indigo-500/30'
+                      : 'text-gray-300 hover:text-white hover:bg-white/5'
+                      }`}>
+
                       <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/0 to-purple-600/0 group-hover:from-indigo-600/10 group-hover:to-purple-600/10 transition-all duration-500"></div>
-                      
+
                       <span className="relative z-10">{item.label}</span>
-                      
+
                       {menu === item.id && (
                         <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full">
                           <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur-sm opacity-70"></div>
@@ -277,19 +275,19 @@ const ModernNavbar = () => {
             </nav>
 
             {/* Dark Connect Button */}
-            <div className={`hidden lg:block nav-item-enter magnetic-hover ${isLoaded ? '' : 'opacity-0'}`} style={{animationDelay: '0.9s'}}>
+            <div className={`hidden lg:block nav-item-enter magnetic-hover ${isLoaded ? '' : 'opacity-0'}`} style={{ animationDelay: '0.9s' }}>
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-gray-800 to-gray-900 rounded-full opacity-0 group-hover:opacity-100 blur transition-all duration-500"></div>
-                
+
                 <AnchorLink href='#contact'>
-                  <div 
+                  <div
                     onClick={() => handleMenuClick("contact")}
                     className='relative px-8 py-3 bg-gradient-to-r from-gray-900 to-black text-white font-semibold rounded-full transition-all duration-500 ripple-effect overflow-hidden border border-gray-700 hover:border-gray-600 shadow-lg hover:shadow-2xl cursor-pointer'
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-                    
+
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                    
+
                     <span className="relative z-10 group-hover:text-gray-100 transition-colors duration-300">Connect with Me</span>
                   </div>
                 </AnchorLink>
@@ -303,8 +301,8 @@ const ModernNavbar = () => {
                 className='p-3 rounded-xl bg-white/5 backdrop-blur-sm transition-all duration-500 hover:bg-white/10 border border-white/10 hover:border-white/20'
               >
                 <div className="relative">
-                  {isMobileMenuOpen ? 
-                    <X size={24} className="text-white transition-all duration-300" /> : 
+                  {isMobileMenuOpen ?
+                    <X size={24} className="text-white transition-all duration-300" /> :
                     <Menu size={24} className="text-white transition-all duration-300" />
                   }
                 </div>
@@ -313,59 +311,57 @@ const ModernNavbar = () => {
           </div>
 
           {/* Mobile Menu */}
-          <div className={`lg:hidden transition-all duration-500 ease-out overflow-hidden ${
-            isMobileMenuOpen 
-              ? 'max-h-screen opacity-100' 
-              : 'max-h-0 opacity-0'
-          }`}>
+          <div className={`lg:hidden transition-all duration-500 ease-out overflow-hidden ${isMobileMenuOpen
+            ? 'max-h-screen opacity-100'
+            : 'max-h-0 opacity-0'
+            }`}>
             <div className='glass-effect mx-4 mb-4 rounded-2xl shadow-2xl menu-slide-in'>
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/5 to-purple-600/5 rounded-2xl"></div>
-              
+
               <nav className='flex flex-col p-6 space-y-4 relative z-10'>
                 {navItems.map((item, index) => (
-                  <div 
-                    key={item.id} 
+                  <div
+                    key={item.id}
                     className="transform transition-all duration-500 magnetic-hover"
-                    style={{ 
+                    style={{
                       animationDelay: `${index * 100}ms`,
                       transform: isMobileMenuOpen ? 'translateX(0)' : 'translateX(-30px)'
                     }}
                   >
-                    <AnchorLink 
+                    <AnchorLink
                       href={item.href}
                       onClick={() => handleMenuClick(item.id)}
                     >
-                      <div className={`relative p-4 rounded-xl text-center transition-all duration-500 ripple-effect overflow-hidden ${
-                        menu === item.id 
-                          ? 'text-white bg-gradient-to-r from-indigo-600/20 to-purple-600/20 border border-indigo-500/30' 
-                          : 'text-gray-300 hover:text-white hover:bg-white/5'
-                      }`}>
-                        
+                      <div className={`relative p-4 rounded-xl text-center transition-all duration-500 ripple-effect overflow-hidden ${menu === item.id
+                        ? 'text-white bg-gradient-to-r from-indigo-600/20 to-purple-600/20 border border-indigo-500/30'
+                        : 'text-gray-300 hover:text-white hover:bg-white/5'
+                        }`}>
+
                         <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/0 to-purple-600/0 group-hover:from-indigo-600/10 group-hover:to-purple-600/10 transition-all duration-500"></div>
-                        
+
                         <span className="relative z-10 font-medium">{item.label}</span>
                       </div>
                     </AnchorLink>
                   </div>
                 ))}
-                
+
                 {/* Mobile Dark Connect Button */}
-                <div 
+                <div
                   className="pt-2 transform transition-all duration-700 magnetic-hover"
-                  style={{ 
+                  style={{
                     animationDelay: '500ms',
                     transform: isMobileMenuOpen ? 'translateX(0)' : 'translateX(-30px)'
                   }}
                 >
                   <AnchorLink href='#contact'>
-                    <div 
+                    <div
                       onClick={() => handleMenuClick("contact")}
                       className='relative p-4 bg-gradient-to-r from-gray-900 to-black text-white font-semibold rounded-xl text-center transition-all duration-500 ripple-effect overflow-hidden border border-gray-700 shadow-lg'
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-                      
+
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full hover:translate-x-full transition-transform duration-700"></div>
-                      
+
                       <span className="relative z-10">Connect with Me</span>
                     </div>
                   </AnchorLink>

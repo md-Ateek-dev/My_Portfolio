@@ -203,71 +203,71 @@ const AdminPanel = () => {
         }
     };
 
-   const saveProject = async () => {
-  if (!newProject.title) return;
+    const saveProject = async () => {
+        if (!newProject.title) return;
 
-  setIsUploading(true);
+        setIsUploading(true);
 
-  try {
-    let imageUrl = newProject.w_imag;
+        try {
+            let imageUrl = newProject.w_imag;
 
-    // ✅ Step 1: Upload to Cloudinary
-    if (imageFile) {
-      const formData = new FormData();
-      formData.append("file", imageFile);
-      formData.append("upload_preset", "portfolio_upload"); // 🔥 change if needed
+            // ✅ Step 1: Upload to Cloudinary
+            if (imageFile) {
+                const formData = new FormData();
+                formData.append("file", imageFile);
+                formData.append("upload_preset", "portfolio_upload"); // 🔥 change if needed
 
-      const res = await fetch(
-        "https://api.cloudinary.com/v1_1/djv97kkwe/image/upload",
-        {
-          method: "POST",
-          body: formData,
+                const res = await fetch(
+                    "https://api.cloudinary.com/v1_1/djv97kkwe/image/upload",
+                    {
+                        method: "POST",
+                        body: formData,
+                    }
+                );
+
+                const data = await res.json();
+
+                if (data.secure_url) {
+                    imageUrl = data.secure_url;
+                    console.log("✅ Cloudinary URL:", imageUrl);
+                } else {
+                    console.error("❌ Upload failed:", data);
+                    showSuccess("❌ Image upload failed!");
+                    setIsUploading(false);
+                    return;
+                }
+            }
+
+            // ✅ Step 2: Save in DB
+            await addProject({
+                ...newProject,
+                w_imag: imageUrl,
+                technologies: newProject.technologies
+                    .split(",")
+                    .map((t) => t.trim()),
+            });
+
+            // ✅ Reset form
+            setNewProject({
+                w_imag: "",
+                title: "",
+                category: "",
+                description: "",
+                technologies: "",
+                year: "",
+                link: "",
+            });
+
+            setImageFile(null);
+            showSuccess("✅ Project added successfully!");
+
+        } catch (error) {
+            console.error("❌ Error:", error);
+            showSuccess("❌ Something went wrong!");
+        } finally {
+            setIsUploading(false);
         }
-      );
-
-      const data = await res.json();
-
-      if (data.secure_url) {
-        imageUrl = data.secure_url;
-        console.log("✅ Cloudinary URL:", imageUrl);
-      } else {
-        console.error("❌ Upload failed:", data);
-        showSuccess("❌ Image upload failed!");
-        setIsUploading(false);
-        return;
-      }
-    }
-
-    // ✅ Step 2: Save in DB
-    await addProject({
-      ...newProject,
-      w_imag: imageUrl,
-      technologies: newProject.technologies
-        .split(",")
-        .map((t) => t.trim()),
-    });
-
-    // ✅ Reset form
-    setNewProject({
-      w_imag: "",
-      title: "",
-      category: "",
-      description: "",
-      technologies: "",
-      year: "",
-      link: "",
-    });
-
-    setImageFile(null);
-    showSuccess("✅ Project added successfully!");
-
-  } catch (error) {
-    console.error("❌ Error:", error);
-    showSuccess("❌ Something went wrong!");
-  } finally {
-    setIsUploading(false);
-  }
-};
+    };
     const handleRemoveProject = async (id) => {
         await removeProject(id);
         showSuccess('🗑️ Project removed!');

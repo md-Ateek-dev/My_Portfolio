@@ -27,7 +27,7 @@ const Contact = () => {
 
     setIsSubmitting(true);
     setResult("Sending your message...");
-    
+
     const formData = new FormData();
     formData.append("name", name);
     formData.append("number", number);
@@ -62,18 +62,17 @@ const Contact = () => {
   };
 
   return (
-    <div id='contact' className="min-h-screen bg-black relative overflow-hidden">
+    <div id='contact' className="min-h-screen bg-transparent relative overflow-hidden">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0">
         {/* Animated Grid */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
-        <div 
+        <div
           className="absolute inset-0 opacity-30 hidden md:block"
           style={{
             background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.15), transparent 40%)`
           }}
         ></div>
-        
+
         {/* Floating Orbs - Adjusted for mobile */}
         <div className="absolute top-1/4 left-1/4 w-32 h-32 md:w-72 md:h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-40 h-40 md:w-96 md:h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -84,8 +83,8 @@ const Contact = () => {
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16 max-w-4xl w-full">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 tracking-tight leading-tight">
-            Let's 
+          <h1 id="heading" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 tracking-tight leading-tight">
+            Let's
             <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent animate-pulse">
               {" "}Connect
             </span>
@@ -97,16 +96,16 @@ const Contact = () => {
 
         {/* Main Content Grid */}
         <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20">
-          
+
           {/* Contact Info Card */}
-          <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50"  className="space-y-6 sm:space-y-8 order-2 lg:order-1">
+          <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="space-y-6 sm:space-y-8 order-2 lg:order-1">
             {/* Info Card */}
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 hover:bg-white/10 transition-all duration-500 group">
               <div className="space-y-6 sm:space-y-8">
                 <div>
                   <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">Get In Touch</h2>
                   <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-                    I'm currently available for freelance projects and full-time opportunities. 
+                    I'm currently available for freelance projects and full-time opportunities.
                     Let's discuss how we can work together to create something amazing.
                   </p>
                 </div>
@@ -151,44 +150,44 @@ const Contact = () => {
             </div>
 
             {/* Social Links */}
-            <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50"  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8">
+            <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8">
               <h3 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6">Connect on Social</h3>
               <div className="flex flex-wrap gap-3 sm:gap-4">
-                <a 
-                  href="https://www.linkedin.com/in/mohd-ateek-80a949256" 
-                  target="_blank" 
+                <a
+                  href="https://www.linkedin.com/in/mohd-ateek-80a949256"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 sm:p-4 bg-blue-600/20 hover:bg-blue-600/40 rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-110 group"
                 >
                   <Linkedin className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 group-hover:text-blue-300" />
                 </a>
-                <a 
-                  href="https://www.instagram.com/md_ateek09?igsh=ajZjNnFreWhwYWgx" 
-                  target="_blank" 
+                <a
+                  href="https://www.instagram.com/md_ateek09?igsh=ajZjNnFreWhwYWgx"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 sm:p-4 bg-pink-600/20 hover:bg-pink-600/40 rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-110 group"
                 >
                   <Instagram className="w-5 h-5 sm:w-6 sm:h-6 text-pink-400 group-hover:text-pink-300" />
                 </a>
-                <a 
-                  href="https://www.facebook.com/people/Mohd-Ateek/100058326015440/" 
-                  target="_blank" 
+                <a
+                  href="https://www.facebook.com/people/Mohd-Ateek/100058326015440/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 sm:p-4 bg-blue-700/20 hover:bg-blue-700/40 rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-110 group"
                 >
                   <Facebook className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500 group-hover:text-blue-400" />
                 </a>
-                <a 
-                  href="https://github.com/md-Ateek-dev" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/md-Ateek-dev"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 sm:p-4 bg-gray-800/50 hover:bg-gray-700/50 rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-110 group"
                 >
                   <Github className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:text-gray-300" />
                 </a>
-                <a 
-                  href="https://wa.me/message/ANXSMJIEXO3GF1" 
-                  target="_blank" 
+                <a
+                  href="https://wa.me/message/ANXSMJIEXO3GF1"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 sm:p-4 bg-green-600/20 hover:bg-green-600/40 rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-110 group"
                 >
@@ -199,7 +198,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div data-aos="fade-up"  data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 hover:bg-white/10 transition-all duration-500 order-1 lg:order-2">
+          <div data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="50" className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 hover:bg-white/10 transition-all duration-500 order-1 lg:order-2">
             <div className="space-y-4 sm:space-y-6">
               <div className="text-center mb-6 sm:mb-8">
                 <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">Send Message</h2>
@@ -270,11 +269,10 @@ const Contact = () => {
               </button>
 
               {result && (
-                <div className={`text-center p-3 sm:p-4 rounded-lg sm:rounded-xl text-sm sm:text-base ${
-                  result.includes('successfully') 
-                    ? 'bg-green-500/20 text-green-300 border border-green-500/20' 
-                    : 'bg-red-500/20 text-red-300 border border-red-500/20'
-                }`}>
+                <div className={`text-center p-3 sm:p-4 rounded-lg sm:rounded-xl text-sm sm:text-base ${result.includes('successfully')
+                  ? 'bg-green-500/20 text-green-300 border border-green-500/20'
+                  : 'bg-red-500/20 text-red-300 border border-red-500/20'
+                  }`}>
                   {result}
                 </div>
               )}
